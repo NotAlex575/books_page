@@ -1,10 +1,9 @@
 import Defaultlayout from "./layouts/Defaultlayout";
 import Homepage from "./pages/Homepage";
 import SingleMovie from "./pages/SingleMovie";
-import {BrowserRouter, Routes, Route} from "./pages/SingleMovie";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -19,6 +18,7 @@ function App() {
             </Routes>
         </BrowserRouter>
     </>
+
   )
 }
 

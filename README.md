@@ -105,12 +105,17 @@ ___________________________________________________________
 
     adesso abbiamo una navbar visibile!
 
+  _________________________________________________________
+
+  10) ROUTER
+
+
     ora però rendiamo possibile la possibilità di passare su altre pagine!
     anticipiamo questo in modo tale che abbiamo già un router pronto per passare da pagina a pagina ovunque, siccome navbar sarà in ogni pagina!
 
-    6) creiamo una componente layouts e creiamo un file Defaultlayout.jsx
+    1) creiamo una componente layouts e creiamo un file Defaultlayout.jsx
 
-    7) installiamo ora tramite terminal -> npm install react-router-dom
+    2) installiamo ora tramite terminal -> npm install react-router-dom
 
     ora abbiamo il router, ma come lo implementiamo nel Defaultlayout.jsx? cosi!
 
@@ -131,13 +136,13 @@ ___________________________________________________________
     adesso abbiamo inserito nel layout il router, ma è vuoto a livello di contenuto...
     questo perchè adesso ci metteremo la nostra navbar!
     
-    8) come abbiamo fatto in App.jsx importiamo navbar sempre come prima riga
+    3) come abbiamo fatto in App.jsx importiamo navbar sempre come prima riga
     import Navbar from "./components/Navbar";
 
-    8) sempre dentro al <> </> e sopra <Outlet></Outlet> ci inseriamo 
+    4) sempre dentro al <> </> e sopra <Outlet></Outlet> ci inseriamo 
     <Navbar></Navbar>
 
-    9) ora che abbiamo il Defaultlayout con la navbar, rimuoviamo Navbar (sia import che <Navbar></Navbar>) da app.jsx e ci inseriamo il Defaultlayout:
+    5) ora che abbiamo il Defaultlayout con la navbar, rimuoviamo Navbar (sia import che <Navbar></Navbar>) da app.jsx e ci inseriamo il Defaultlayout:
 
         1) importiamo Defaultlayout.jsx in app.jsx attraverso 
         import Defaultlayout from "./layouts/Defaultlayout"
@@ -150,3 +155,68 @@ ___________________________________________________________
                 </Route>
             </Routes>
         </BrowserRouter>
+
+        INFO!
+
+        cosa fanno BrowserRouter, Routes e Route?
+
+          1) BrowserRouter -> Gestisce l'intera logica di routing dell'app, ovvero tutti i componenti al suo interno
+
+          2) Routes -> è il contenitore delle varie route che metteremo al suo interno
+
+          3) Route -> gestisce la visibilità del singola pagina una volta che abbiamo eseguito la sua path (come tipo "/" o "/about", etc.)
+
+
+        in questo modo ora l'elemento Defaultlayout ha a disposizione la possibilità di navigare tra le pagine dei componenti al suo interno
+
+        ma al momento non abbiamo neanche un collegamento che porta ad una determinata pagina (infatti ora abbiamo 0 collegamenti di route....)
+
+        l'esercizio attuale, è quello di creare le 2 seguenti pagine:
+        
+        1) Homepage.jsx che contiene la lista dei libri 
+        
+        2) SingleMovie.jsx, che comprenderà solo il        dettaglio di 1 singolo libro (il singolo libro sarà scelto in base al libro cliccato)
+
+        quindi...
+
+___________________________________________________________
+
+11) PAGINE 
+
+    iniziamo col creare 2 pagine, che tramite l'uso delle route saranno raggiungibili!
+
+    1)  creiamo un folder "pages", in cui ci inseriamo le varie pagine in cui vogliamo navigare
+
+    2) creiamo la prima pagina, ovvero la Homepage, creando un nuovo file dentro il folder pages, chiamato Homepage.jsx
+
+    3) dentro a Homepage.jsx eseguiamo sempre rafce, che farà comparire questo scritto:
+
+        const Homepage = () => {
+            return (
+                <div className="text-center fs-1 fw.bold mb-5">Homepage</div>
+            )
+        }
+
+        export default Homepage
+
+    4) creato lo scheletro della Homepage, facciamo in modo che sia visibile nella pagina, quindi in app.jsx, importiamo Homepage.jsx sopra con tutti gli import già messi, e dentro a <Route element={<Defaultlayout></Defaultlayout>}>, ci andiamo ad inserire:
+
+    <Route path="/" element={<Homepage></Homepage>}></Route>
+
+    cosi facendo, ogni volta che saremo nella path iniziale della pagina (siccome abbiamo messo come path "/"), apparirà la homepage!
+
+    ora non ci resta che creare SingleMovie.jsx, eseguire di nuovo rafce per creare il suo scheletro e importarlo in app.jsx, sempre con l'uso dell'import.
+
+    ora però dobbiamo considerare che non è necessario creare un'altra path (perchè alla fine rimaniamo sempre nella pagina principale, ma mostrando solo un'elemento!), quindi andiamo a spezzettare ciò in questa maniera:
+
+    <Route path="/">
+        <Route path = "" element={<Homepage></Homepage>}></Route>
+        <Route path = ":id" element={<SingleMovie></SingleMovie>}></Route>
+    </Route>
+
+    cosa abbiamo fatto?
+
+    abbiamo una path unica, dove la pagina principale è homepage, ma se in futuro, dopo aver messo il lato logico, cliccheremo un libro, passeremo direttamente a vedere il SingleMovie
+
+
+    
