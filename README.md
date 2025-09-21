@@ -389,7 +389,15 @@ nel .then recuperiamo la lista di libri e la mettiamo nei books (attraverso setB
 
     useEffect(fetchBooks, [])
 
+vogliamo vedere se cicla i libri presenti nel database? 
 
+scriviamo sotto setBooks(resp.data);
+
+console.log(resp.data);
+
+__________________________________________________________
+
+13) 
 
 
 

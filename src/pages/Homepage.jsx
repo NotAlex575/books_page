@@ -10,6 +10,7 @@ const Homepage = () => {
         axios.get("http://localhost:3000/books")
         .then((resp) => {
             setBooks(resp.data);
+            console.log(resp.data);
         })
         .catch((err) => console.log(err));
     };
