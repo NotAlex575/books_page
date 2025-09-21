@@ -29,51 +29,23 @@ const Homepage = () => {
                 </div>
             </div>
             <div className="row gy-3">
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card">
-                        <img src="./img/sample.jpg" alt="libro" />
-                        <div className="overlay">
-                            <h2 className="text-center my-3">Titolo</h2>
-                            <p className="text-center">Autore</p>
+                {books.map(book => {
+                    return(
+                        <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
+                            <div className="card">
+                                <img 
+                                    src = {book.image}
+                                    className="img-fluid"
+                                    alt = {book.author} 
+                                />
+                                <div className="overlay">
+                                    <h2 className="text-center my-3">{book.title}</h2>
+                                    <p className="text-center">{book.author}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card">
-                        <img src="./img/sample.jpg" alt="libro" />
-                        <div className="overlay">
-                            <h2 className="text-center my-3">Titolo</h2>
-                            <p className="text-center">Autore</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card">
-                        <img src="./img/sample.jpg" alt="libro" />
-                        <div className="overlay">
-                            <h2 className="text-center my-3">Titolo</h2>
-                            <p className="text-center">Autore</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card">
-                        <img src="./img/sample.jpg" alt="libro" />
-                        <div className="overlay">
-                            <h2 className="text-center my-3">Titolo</h2>
-                            <p className="text-center">Autore</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card">
-                        <img src="./img/sample.jpg" alt="libro" />
-                        <div className="overlay">
-                            <h2 className="text-center my-3">Titolo</h2>
-                            <p className="text-center">Autore</p>
-                        </div>
-                    </div>
-                </div>
+                    )
+                })}
             </div>
         </div>
     )

@@ -395,9 +395,108 @@ scriviamo sotto setBooks(resp.data);
 
 console.log(resp.data);
 
+avviamo sia books_page che il progetto backend che abbiamo preparato prima, apriamo anche il database in mysql (se non lo hai gia aperto), entriamo nella connection che avevamo creato, entriamo nella pagina localhost aperta qui, clicchiamo f12 per vedere se ci mostra la lista di libri, eeeeeeeeee.....
+
+Access to XMLHttpRequest at 'http://localhost:3000/books' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+comparirà questo errore.... MA PERCHE?
+
+perchè il browser sta bloccando la richiesta, poichè ci sono due origini diverse (porte diverse = origini diverse).
+
+Per permettere la comunicazione, dobbiamo fare in modo che la parte backend accetti richieste dalla parte del frontend!
 __________________________________________________________
 
-13) 
+
+per fare ciò dobbiamo tornare nel progetto backend, e fare un passaggio per farli comunicare tra loro!
+
+da li parti al passaggio 13!
+
+__________________________________________________________
+
+
+14) LISTA.MAP
+
+adesso cicliamo ogni singolo elemento presente nel database e mostriamo nella pagina!
+
+abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e per fare questo cicliamo la lista del database con un mapping (.map), dove prenderà ogni elemento presente nella lista, con i value che poi vogliamo vedere!
+
+   1) torniamo in Homepage.jsx e teniamoci solo:
+
+   return (
+        <div className="container my-5">
+            <div className="row">
+                <div className="col-12 text-center">
+                    <h1>Bookly</h1>
+                    <h2>
+                        <i>Libri per i veri appassionati</i>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    )
+
+    modifichiamolo:
+
+    2) sotto il div contenente il row, aggiungiamoci un'altro row, come questo:
+
+    <div classname = "row gy-3"></div>
+
+    3) dentro a questo container inseriamoci il ciclo del .map
+
+    come? cosi!
+
+    {books.map(book => {
+        return(
+            {/* contenuto loopato! */}
+        )
+    })}
+
+    in questo modo loopiamo il contenuto presente nel return!
+
+    4) dentro adesso al return inseriamo i dati che vogliamo inserire e loopare!
+
+    return(
+        <div className="col-12 col-md-6 col-lg-4">
+            <div className="card">
+                <img src="./img/sample.jpg" alt="libro" />
+                <div className="overlay">
+                    <h2 className="text-center my-3">Titolo</h2>
+                    <p className="text-center">Autore</p>
+                </div>
+            </div>
+        </div>
+    )
+
+    5) modifichiamo i valori presenti qui!
+
+        1) nel primo div con col.12, dopo classname aggiungiamo:
+
+        key = {book.id}
+
+        questo identificherà quale libro inserire (li ordinerà in ordine cronologico dell'id!)
+
+        2) nell'img, in src inseriamo:
+
+        src = {book.image}
+        alt = {book.author}
+
+        questo metterà:
+
+        - immagine del libro con id = presente
+
+        - nome autore che troveremo se inspezioniamo l'immagine
+
+        3) nel div contenente la class overlay, inseriamo i seguenti:
+
+            1) nell'h2 ci sarà
+
+            <h2>{books.title}</h2>
+
+            2) nel p ci sarà
+
+            <p>{books.author}</p>
+
+        in questo modo avremo il nome del libro e l'autore dell'libro in base all'id che stiamo ciclando!
 
 
 
