@@ -499,6 +499,9 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
         in questo modo avremo il nome del libro e l'autore dell'libro in base all'id che stiamo ciclando!
 
 
+        ora abbiamo il lato FRONT-END con le tabelle visibili!
+
+
 
 
    
