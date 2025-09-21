@@ -28,6 +28,8 @@ ________________________________________________
 
         - npm i bootstrap@5.3.8 (o se si trova una versione più aggiornata scarica quella dal loro sito ufficiale)
 
+        - npm install react-router-dom
+
     6) cancelliamo app.css
 
     7) svuotiamo app.jsx e lascia solo questo
@@ -217,6 +219,185 @@ ___________________________________________________________
     cosa abbiamo fatto?
 
     abbiamo una path unica, dove la pagina principale è homepage, ma se in futuro, dopo aver messo il lato logico, cliccheremo un libro, passeremo direttamente a vedere il SingleMovie
+
+    inizia col sbizzarrirti col html e css per la struttura grafica della homepage!
+
+    se ti serve ti metto un'esempio!
+
+    1) HOMEPAGE:
+
+    const Homepage = () => {
+        return (
+            <div className="container my-5">
+                <div className="row">
+                    <div className="col-12 text-center">
+                        <h1>Bookly</h1>
+                        <h2>
+                            <i>Libri per i veri appassionati</i>
+                        </h2>
+                    </div>
+                </div>
+                <div className="row gy-3">
+                    <div className="col-12 col-md-6 col-lg-4">
+                        <div className="card">
+                            <img src="./img/sample.jpg" alt="libro" />
+                            <div className="overlay">
+                                <h2 className="text-center my-3">Titolo</h2>
+                                <p className="text-center">Autore</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4">
+                        <div className="card">
+                            <img src="./img/sample.jpg" alt="libro" />
+                            <div className="overlay">
+                                <h2 className="text-center my-3">Titolo</h2>
+                                <p className="text-center">Autore</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4">
+                        <div className="card">
+                            <img src="./img/sample.jpg" alt="libro" />
+                            <div className="overlay">
+                                <h2 className="text-center my-3">Titolo</h2>
+                                <p className="text-center">Autore</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4">
+                        <div className="card">
+                            <img src="./img/sample.jpg" alt="libro" />
+                            <div className="overlay">
+                                <h2 className="text-center my-3">Titolo</h2>
+                                <p className="text-center">Autore</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4">
+                        <div className="card">
+                            <img src="./img/sample.jpg" alt="libro" />
+                            <div className="overlay">
+                                <h2 className="text-center my-3">Titolo</h2>
+                                <p className="text-center">Autore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    export default Homepage
+
+    NOTA! qui ho creato nella cartella public una cartella img contenente un img.jpg chiamato sample.jpg (se non hai 1 immagine, scaricane 1 dal web, la rinomi come vuoi e la metti dentro la cartella, poi dentro img src = "./img/nomeFoto.jpg" o png se hai scaricato la foto in formato png)
+
+    ________________________
+
+    2) NAVBAR -> rimosso qualche elemento non necessario per l'esercizio e aggiunto qualche stile grafico!
+
+    const Navbar = () => {
+        return (
+            <header className="bg-orange">
+                <h1>Questa è la navbar!</h1>
+            </header>
+        )
+    }
+
+    export default Navbar
+    ________________________
+
+    3) INDEX.CSS -> ci ho aggiunto di mio qualche elemento di css dentro index.css:
+
+    .bg-orange{
+        background-color: #a37230;
+        text-align: center;
+    }
+
+    header{
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header h1{
+        color: white !important;
+    }
+
+    h1, h2, h3, h4, h5, h6{
+        color: #a37230 !important;
+    }
+
+    body{
+        font-family: sans-serif;
+    }
+
+    ________________________
+
+fatto ciò abbiamo un vero e proprio scheletro della nostra homepage, con 5 card dei """libri""".
+
+ma ora vediamo di inserire la nostra vera lista di libri, usando il database che abbiamo creato!
+
+___________________________________________________________
+
+12) AXIOS E USESTATE/USEEFFECT
+
+iniziamo ad includere all'interno di homepage i seguenti import:
+
+   1)  import axios from "axios" 
+   
+la libreria axios, serve per fare le chiamate HTTP (GET, POST, PUT, DELETE, ecc.) verso un server o un’API (in questo caso ci riferiremo al database)
+
+   2) import { useState, useEffect } from "react" 
+
+ci sono qui 2 librerie:
+    
+- useState -> Serve per salvare e cambiare un valore dentro al componente. 
+    
+- useEffect -> Serve per fare qualcosa quando il componente si carica o cambia stato.
+
+ora dentro a const HomePage e prima del return, andiamo ad eseguiamo i seguenti passaggi:
+
+1) dichiariamo le variabili di stato, attraverso
+
+    const [books, setBooks] = useState ([])
+
+    dove books sarà il contenitore, mentre setBooks sarà la function che modificherà o inserirà i libri nella pagina
+
+2) ora recuperiamo i libri nel database attraverso la chiamata ajax, che verrà eseguita alla chiamata della function fetchBooks!
+
+    const fetchBooks = () => {
+        axios.get("http://localhost:3000/books")
+    };
+
+http://localhost:3000/books se ricordi, era la chiamata che facevamo con postman (quindi se non è uguale per te, copia direttamente il protocollo che hai nel get di index)
+
+3) recuperiamo, li dobbiamo settare come response, quindi continuando la chiamata ajax:
+
+    const fetchBooks = () => {
+        axios.get("http://localhost:3000/books")
+        .then((resp) => {
+            setBooks(resp.data);
+        })
+        .catch((err) => console.log(err));
+    };
+
+nel .then recuperiamo la lista di libri e la mettiamo nei books (attraverso setBooks), il cui value sarà la value entro axios.get (e come se fosse la chiamata query che abbiamo fatto su postman, ma con la differenza che qui salviamo i valori!)
+
+4) creiamo un useEffect per richiamare la function, alla prima esecuzione del progetto e ogni volta che viene eseguita una modifica!
+
+    useEffect(fetchBooks, [])
+
+
+
+
+
+
+   
+
+
+
 
 
     

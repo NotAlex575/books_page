@@ -1,8 +1,6 @@
-import React from 'react'
-
 const Navbar = () => {
   return (
-    <header className="border bg-primary-subtle d-flex row">
+    <header className="bg-orange">
         <h1>Questa è la navbar!</h1>
     </header>
   )
