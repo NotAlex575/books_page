@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import Bookcard from "../components/Bookcard";
 
 const Homepage = () => {
     //definizioni delle variabili di stato
@@ -30,21 +31,8 @@ const Homepage = () => {
             </div>
             <div className="row gy-3">
                 {books.map(book => {
-                    return(
-                        <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
-                            <div className="card">
-                                <img 
-                                    src = {book.image}
-                                    className="img-fluid"
-                                    alt = {book.author} 
-                                />
-                                <div className="overlay">
-                                    <h2 className="text-center my-3">{book.title}</h2>
-                                    <p className="text-center">{book.author}</p>
-                                </div>
-                            </div>
-                        </div>
-                    )
+                    const { id } = book;
+                    return <Bookcard key={id} book={book}></Bookcard>
                 })}
             </div>
         </div>

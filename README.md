@@ -502,6 +502,76 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
         ora abbiamo il lato FRONT-END con le tabelle visibili!
 
 
+        EXTRA: PROPS
+
+        facciamo in modo che la card sia un'elemento richiamabile, in modo tale che se dobbiamo metterla da un'altra parte, basta richiamare l'elemento senza riscriverlo tutto!
+
+        questa chiamata si chiama PROPS!
+
+        quindi:
+
+        1) in components creiamo il file BookCard.jsx
+
+        2) creiamo una constante chiamata BookCard, il cui contenuto sarà book (singolo elemento del libro cercato nel db in base all'id):
+
+        const BookCard = ({ book }) =>{
+            {/* CONTENUTO */}
+        }
+
+        export default BookCard
+
+        3) qui dentro ci creiamo l'oggetto book con il destructoring degli elementi del database che vogliamo:
+
+        const { title, image, author } = book
+
+        4) in Homepage.jsx, tagliamo questo contenuto:
+
+        <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
+            <div className="card">
+                <img 
+                    src = {book.image}
+                    className="img-fluid"
+                    alt = {book.author} 
+                />
+                <div className="overlay">
+                    <h2 className="text-center my-3">{book.title}</h2>
+                    <p className="text-center">{book.author}</p>
+                </div>
+            </div>
+        </div>
+
+        e lo mettiamo dentro ad un return in bookcard.jsx:
+
+        return (
+            <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
+                <div className="card">
+                    <img 
+                        src = {image}
+                        className="img-fluid"
+                        alt = {author} 
+                    />
+                    <div className="overlay">
+                        <h2 className="text-center my-3">{book.title}</h2>
+                        <p className="text-center">{author}</p>
+                    </div>
+                </div>
+            </div>
+        )
+
+        NOTA: siccome qui abbiamo usato il destructoring, non abbiamo più bisogno di dichiarare il elemento.value, ma solo il value!
+
+        5) in Homepage.jsx, importiamo Bookcard.jsx, e dentro al mapping, dove prima ci stava il contenuto della card, al suo interno mettiamo:
+        const { id } = book;
+        return <Bookcard key={id} book={book}></Bookcard> 
+
+        quindi, in homepage prendiamo sempre l'id nel .map e tramite la props lo passiamo come value in Bookcard.jsx per visualizzare la card in base all'id, questo finche non visualizza tutti gli id nel database!
+
+        in questo modo, adesso abbiamo una props che possiamo richiamare quando vogliamo se vogliamo creare la card con quei elementi (ci servirà dopo!)
+
+
+
+
+
 
 
    
