@@ -35,7 +35,6 @@ ________________________________________________
     7) svuotiamo app.jsx e lascia solo questo
 
         function App() {
-            const [count, setCount] = useState(0)
 
             return (
                 <>
@@ -566,7 +565,19 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
 
         quindi, in homepage prendiamo sempre l'id nel .map e tramite la props lo passiamo come value in Bookcard.jsx per visualizzare la card in base all'id, questo finche non visualizza tutti gli id nel database!
 
-        in questo modo, adesso abbiamo una props che possiamo richiamare quando vogliamo se vogliamo creare la card con quei elementi (ci servirà dopo!)
+        in questo modo, adesso abbiamo una props che possiamo richiamare quando vogliamo se vogliamo creare la card con quei elementi!
+
+___________________________________________________________
+
+15) SINGLECARD
+
+
+
+___________________________________________________________
+
+16) REVIEWS
+
+
 
 
 
