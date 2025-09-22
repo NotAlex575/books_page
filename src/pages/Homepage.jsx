@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import Bookcard from "../components/Bookcard";
-import { Link } from "react-router-dom";
 
 const Homepage = () => {
     //definizioni delle variabili di stato
@@ -22,11 +21,11 @@ const Homepage = () => {
 
     return (
         <div className="container my-5">
-            <div className="row">
+            <div className="row mb-100">
                 <div className="col-12 text-center">
                     <h1>Bookly</h1>
                     <h2>
-                        <i>Libri per i veri appassionati</i>
+                        <i>Libri per i veri appassionati!</i>
                     </h2>
                 </div>
             </div>

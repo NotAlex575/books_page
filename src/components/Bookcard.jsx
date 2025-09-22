@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 const BookCard = ({ book }) =>{
     const {id, title, image, author } = book
     return (
-        <div className="col-12 col-md-6 col-lg-4">
+        <div className="col-12 col-lg-6">
             <div className="card">
                 <Link className="text-decoration-none" to={`/${id}`}>
                 <img 
-                    src = "./img/sample.jpg" 
+                    src = {image || "./img/sample.jpg"} 
                     className="img-fluid"
                     alt = {author} 
                 />

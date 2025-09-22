@@ -569,17 +569,262 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
 
 ___________________________________________________________
 
-15) SINGLECARD
+15) SINGLECARD (LINK, )
 
+    ora facciamo in modo tale che le card diventino cliccabili, e con il click entrino nella pagina che avevamo creato all'inizio (Singlebook.jsx), con la card singola e, sotto le recensioni del libro!
 
+    1) in Bookcard importiamo Link:
+
+        import { Link } from "react-router-dom";
+
+    2) nella const, dove facciamo il destructoring:
+
+        const {title, image, author } = book
+
+        ci aggiungiamo id:
+
+        const {id, title, image, author } = book
+
+    3) dentro alla card creata, mettiamo tutto il suo contenuto dentro a <Link></Link>:
+
+        <Link className="text-decoration-none" to={`/${id}`}>
+
+    il {`/${id}`} ci servirà per passare nella pagina SingleBook, attravero il link che abbiamo impostato in app.jsx, ovvero questo!
+
+    <Route path = ":id" element={<SingleBook></SingleBook>}></Route>
+
+    ora abbiamo una route che usa questo link!
+    iniziamo col creare la pagina Singlebook!
+
+    4) in Singlebook iniziamo col importare i seguenti:
+
+    import axios from "axios"
+    import { useState, useEffect } from "react"
+    import { useParams, useNavigate} from "react-router-dom"
+
+    useNavigate ci servirà dopo!
+
+    5) dichiariamo le constanti dentro a const SingleBook, per poi dopo mostrare la card specifica!
+
+    const { id } = useParams();
+    const [book, setBook] = useState([]);
+    const [totalBooks, setTotalBooks] = useState();
+
+    6) come nella homepage, facciamo il fetchBook, ma con la differenza che, la nostra chiamata axios avrà in più l'id:
+
+    axios.get(`http://localhost:3000/books/${id}`)
+
+    in questo modo, noi entriamo nella pagina /valoreId
+    creiamo ora l'html!
+
+    7) dentro al return creiamo il nostro html
+
+    esempio:
+
+    <div className="container my-5">
+        <div className="row mb-100">
+            <div className="col-12 text-center">
+                <h1>Bookly</h1>
+                <h2>
+                    <i>Libri per i veri appassionati!</i>
+                </h2>
+            </div>
+        </div>
+        <div className="row gy-3">
+            <div className="col-12">
+                <div className="card medium-card">
+                <img 
+                    src = {"./img/sample.jpg"} 
+                    className="img-fluid"
+                    alt = {book.author} 
+                />
+                    <div className="overlay">
+                    <h2 className="text-center my-3">{book.title}</h2>
+                    <p className="text-center">{book.author}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    praticamente simile a come abbiamo fatto la Homepage!
+
+    ho aggiunto anche qualcosina nell'index.css:
+
+    .medium-card {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .medium-card img {
+        max-height: 700px;
+        object-fit: cover;
+    }
+
+    EXTRA: Se vuoi, possiamo fare anche che la card singola si richiami con un'altra props!
+
+       1) basta creare in components un'altro file chiamato ad esempio Bookcard_selected, e al suo interno ci mettiamo tutto quello che ci sta dentro al <div className="row gy-3">!
+
+        struttura d'esempio:
+
+    _______
+
+        const Bookcard_selected = ({book}) => {
+            const {id, title, image, author } = book
+            return (
+                <div className="col-12">
+                    <div className="card medium-card">
+                    <img 
+                        src = {"./img/sample.jpg"} 
+                        className="img-fluid"
+                        alt = {author} 
+                    />
+                        <div className="overlay">
+                        <h2 className="text-center my-3">{title}</h2>
+                        <p className="text-center">{author}</p>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        export default Bookcard_selected
+
+       2) in SingleBook.jsx eseguiamo l'import della props:
+        
+            import Bookcard_selected from "../components/Bookcard_selected"
+
+        3) poi rimpiazziamo il contenuto di:
+        
+        <div className="row gy-3">
+
+        in questo!
+
+        <div className="row gy-3">
+            <Bookcard_selected key={id} book={book}></Bookcard_selected>
+        </div>
+
+    
+
+    ora abbiamo una pagina visibile, che col click di un libro presente nella homepage, mi porta nella pagina singola, con il libro singolo!
 
 ___________________________________________________________
 
-16) REVIEWS
+16) BUTTON (GO NEXT PAGE, GO PREVIOUS PAGE, GO HOMEPAGE)
 
+    un'altra funzionalità che possiamo implementare nel nostro progetto della card singola è l'uso dei bottoni che, con il click di uno di questi eseguira un'azione specifica (in questo caso andare al libro successivo/precedente della lista o tornare alla homepage con tutti i libri visibili)!
 
+    ecco come fare!
 
+    1) adesso sfrutteremo lo useNavigate che abbiamo implementato prima, creando una variabile fissa chiamata naviga, che userà lo useNavigate!
 
+        const naviga = useNavigate();
+
+    2) creata la chiamata allo useNavigate, creiamo 3 function diverse!
+
+    - goPrevPage:
+
+        const goPrevPage = () => {
+            const page = parseInt(id) - 1;
+            naviga("/" +page);
+        }
+
+    - goNextPage
+
+        const goNextPage = () => {
+            const page = parseInt(id) + 1;
+            naviga("/" +page);
+        }
+
+    - goHomepage
+
+        const goHomepage = () => {
+            naviga("/");
+        }
+
+    queste ci serviranno poi per cambiare la pagina!
+
+    come funziona?
+
+       1) goHomepage andrà direttamente al link "/", che in app.js è la homepage
+
+       2) goPrevPage e goNextPage sfruttano l'id che abbiamo per incrementarlo o decrementarlo!
+
+       se ad esempio noi stiamo nella pagina "/1", con il goNextPage andremo in "/2" e viceversa, ovvero con il goPrevPage da che stiamo in "/2" andremo in "/1"
+
+    3) implementiamo una function fetchTotalBooks (sotto al fetchBook), per avere anche la length dei libri nel database!
+
+        const fetchTotalBooks = () => {
+            axios.get("http://localhost:3000/books")
+            .then(resp => setTotalBooks(resp.data.length))
+            .catch(err => console.log(err));
+        };
+
+    questo pezzo, ci servirà nel prossimo punto, capirete perchè!
+
+    3) adesso implementiamo 3 bottoni, che verrano usati per fare il cambio pagina!
+
+    esempio di struttura:
+
+        sotto a:
+
+        <div className="row gy-3">
+            <Bookcard_selected key={id} book={book}></Bookcard_selected>
+        </div>
+
+        mettiamoci:
+
+        <div className="flex-row">
+            <button className="btn btn-primary btn-prev-next"
+                disabled={book.id === 1}
+                onClick={goPrevPage}>
+                Vai al libro precedente
+            </button>
+            <button className="btn btn-primary btn-prev-next margin-left-right-50"
+                onClick={goHomepage}>
+                Torna alla homepage
+            </button>
+            <button className="btn btn-primary btn-prev-next"
+                disabled={book.id === totalBooks}
+                onClick={goNextPage}>
+                Vai al libro successivo
+            </button>
+        </div>
+
+    anche qui ho inserito un po ci css!
+
+        .btn-prev-next{
+            margin-top: 50px;
+            margin-bottom: 50px;
+            height: 60px;
+            width: 200px;
+        }
+
+        .margin-left-right-50{
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+    NOTA! notate qualcosa in questo html??
+
+    ci stà un DISABLED con un contenuto (condizione)
+
+    a che ci serve?
+
+       - serve precisamente a disabilitare il bottone una volta che la condizione nel disabled è true
+
+        ad esempio:
+
+            disabled={book.id === 1}
+
+        qui, se siamo al primo libro, non esiste il libro 0, quindi non ci sarà nessun libro prima del 1!
+
+            disabled={book.id === totalBooks}
+
+        ricordi che prima abbiamo creato una function fetchTotalBook?
+        ecco a cosa ci serve! ovvero se abbiamo raggiunto l'ultimo libro nella lista, allora non c'è nessun libro dopo, quindi disabilitiamo il bottone!
+
+    adesso abbiamo quindi dei pulsanti che ci permettono di navigare tra i libri, o per tornare alla homepage!
 
 
 

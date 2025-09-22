@@ -18,11 +18,38 @@ h1, h2, h3, h4, h5, h6{
     color: #a37230 !important;
 }
 
+.mb-100{
+    margin-bottom: 100px;
+}
+
 body{
     font-family: sans-serif;
 }
 
 .btn-prev-next{
+    margin-top: 50px;
+    margin-bottom: 50px;
     height: 60px;
-    width: 100px;
+    width: 200px;
+}
+
+.margin-left-right-50{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.medium-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.medium-card img {
+  max-height: 700px;
+  object-fit: cover;
 }
