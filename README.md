@@ -1,427 +1,269 @@
-STEPLIST CREAZIONE WEBAPP LIBRERIA (PASSO PER PASSO)
+# STEPLIST CREAZIONE WEBAPP LIBRERIA (PASSO PER PASSO)
 
 Questa webapp avrà un db di libri a cui possiamo inserire delle recenzioni!
 
-dopo aver seguito i vari passaggi (fino al punto 7), iniziamo la parte front-end del progetto!
+Dopo aver seguito i vari passaggi (fino al punto 7), iniziamo la parte front-end del progetto!
 
-iniziamo!
+**INIZIAMO!**
 
-________________________________________________
+---
 
-8) REACT
+## 8) REACT
 
+iniziamo a creare il nostro progetto react!
+seguiamo i seguenti passaggi per crearla!
 
-    iniziamo a creare il nostro progetto react!
-    seguiamo i seguenti passaggi per crearla!
+1. apriamo il terminal
 
-    1) apriamo il terminal
+2. eseguiamo il comando
 
-    2) eseguiamo il comando npm create vite@latest
+```bash
+npm create vite@latest
+```
 
-    3) qui inseriremo per esercitazione solo il nome del progetto (il resto per ora non ci serve), e lo chiamiamo per esempio books_page
+3. qui inseriremo per esercitazione solo il nome del progetto (il resto per ora non ci serve), e lo chiamiamo per esempio `books_page`
 
-    4) fatto questo inseriamo il comando cd books_page per entrare col termimale nella path del progetto
+4. fatto questo inseriamo il comando
 
-    5) inseriamo dei framework che ci saranno utili!
+```bash
+cd books_page
+```
 
-        - npm i axios
+per entrare col terminale nella path del progetto
 
-        - npm i bootstrap@5.3.8 (o se si trova una versione più aggiornata scarica quella dal loro sito ufficiale)
+5. inseriamo dei framework che ci saranno utili!
 
-        - npm install react-router-dom
+```bash
+npm i axios
+npm i bootstrap@5.3.8  # (o se si trova una versione più aggiornata scarica quella dal loro sito ufficiale)
+npm install react-router-dom
+```
 
-    6) cancelliamo app.css
+6. cancelliamo `app.css`
 
-    7) svuotiamo app.jsx e lascia solo questo
+7. svuotiamo `app.jsx` e lascia solo questo
 
-        function App() {
+```jsx
+function App() {
 
-            return (
-                <>
-                    <h1>Hello world!</h1>
-                </>
-            )
-        }
+    return (
+        <>
+            <h1>Hello world!</h1>
+        </>
+    )
+}
 
-        export default App;
+export default App;
+```
 
-    8) svuota anche index.css
+8. svuota anche `index.css`
 
+ora abbiamo un progetto react vuoto che, all'avvio, ci mostrerà `hello world` nella pagina
 
-    ora abbiamo un progetto react vuoto che, all'avvio, ci mostrerà hello world nella pagina
+---
 
-___________________________________________________________
+## 9) PAGINE WEB
 
-9) PAGINE WEB
+ora che abbiamo creato il progetto react, popoliamolo con delle pagine!
 
-    ora che abbiamo creato il progetto react, popoliamolo con delle pagine!
+1. iniziamo col creare una cartella `components`
 
-    1) iniziamo col creare una cartella components
+2. dentro quella cartella, creiamo un file `Navbar.jsx`
 
-    2) dentro quella cartella, creiamo un file Navbar.jsx
+3. ora possiamo creare la navbar del nostro progetto, ecco a te un'esempio di uno scheletro della navbar:
 
-    3) ora possiamo creare la navbar del nostro progetto, ecco a te un'esempio di uno scheletro della navbar:
+```jsx
+import React from 'react'
 
-    import React from 'react'
+const Navbar = () => {
+    return (
+        <div>Navbar</div>
+    )
+}
 
-        const Navbar = () => {
-            return (
-                <div>Navbar</div>
-            )
-        }
+export default Navbar
+```
 
-        export default Navbar
+questo scheletro della navbar si può creare anche solo con un comando scritto proprio nel progetto!
+`rafce` crea automaticamente questo!
 
-    questo scheletro della navbar si può creare anche solo con un comando scritto proprio nel progetto!
-    basta scrivere rafce e crea automaticamente questo!
+Se abbiamo scaricato bootstrap, possiamo sfruttare questo framework per creare lo stile grafico della pagina (possiamo comunque usare `index.css` per fare dei nostri stili)
 
-    se abbiamo scaricato bootstrap, possiamo sfruttare questo framework per creare lo stile grafico della pagina (possiamo comunque usare index.css per fare dei nostri stili)
+Se vuoi in futuro creare degli stili per una singola pagina, basta creare una cartella `modules`, il cui interno avrà i vari `file.module.css`
 
-    se vuoi in futuro creare degli stili per una singola pagina, basta creare una cartella modules, il cui interno avrà i vari file.module.css
+ma per ora:
 
-    ma per ora:
-    
-    4) usiamo bootstrap
+4. usiamo bootstrap
 
-    es:
+es:
 
-        import React from 'react'
+```jsx
+import React from 'react'
 
-            const Navbar = () => {
-            return (
-                <header className="border bg-primary-subtle d-flex row">
-                    <h1>Questa è la navbar!</h1>
-                </header>
-            )
-        }
+const Navbar = () => {
+    return (
+        <header className="border bg-primary-subtle d-flex row">
+            <h1>Questa è la navbar!</h1>
+        </header>
+    )
+}
 
-        export default Navbar
-    
-    5) adesso è necessario inserire Navbar dentro a app.css per vederlo, quindi andiamo in app.jsx e inseriamo:
+export default Navbar
+```
 
-        1) alla prima riga l'import:
-        import Navbar from "./components/Navbar";
+5. adesso è necessario inserire `Navbar` dentro a `app.css` per vederlo, quindi andiamo in `app.jsx` e inseriamo:
 
-        2) dentro ai <> </> ci inseriamo <Navbar></Navbar>
+1) alla prima riga l'import:
 
-    adesso abbiamo una navbar visibile!
+```jsx
+import Navbar from "./components/Navbar";
+```
 
-  _________________________________________________________
+2. dentro ai `<> </>` ci inseriamo
 
-  10) ROUTER
+```jsx
+<Navbar></Navbar>
+```
 
+adesso abbiamo una navbar visibile!
 
-    ora però rendiamo possibile la possibilità di passare su altre pagine!
-    anticipiamo questo in modo tale che abbiamo già un router pronto per passare da pagina a pagina ovunque, siccome navbar sarà in ogni pagina!
+---
 
-    1) creiamo una componente layouts e creiamo un file Defaultlayout.jsx
+## 10) ROUTER
 
-    2) installiamo ora tramite terminal -> npm install react-router-dom
+ora però rendiamo possibile la possibilità di passare su altre pagine!
+anticipiamo questo in modo tale che abbiamo già un router pronto per passare da pagina a pagina ovunque, siccome navbar sarà in ogni pagina!
 
-    ora abbiamo il router, ma come lo implementiamo nel Defaultlayout.jsx? cosi!
+1. creiamo una componente `layouts` e creiamo un file `Defaultlayout.jsx`
 
-    
-        import { Outlet } from "react-router-dom"
+2. installiamo ora tramite terminal -> `npm install react-router-dom` (se non lo abbiamo già fatto)
 
-        const Defaultlayout = () => {
-        return (
-            <>
-                <Outlet></Outlet>
-            </>
-        )
-        }
+ora abbiamo il router, ma come lo implementiamo nel `Defaultlayout.jsx`? cosi!
 
-        export default Defaultlayout
+```jsx
+import { Outlet } from "react-router-dom"
 
+const Defaultlayout = () => {
+    return (
+        <>
+            <Outlet></Outlet>
+        </>
+    )
+}
 
-    adesso abbiamo inserito nel layout il router, ma è vuoto a livello di contenuto...
-    questo perchè adesso ci metteremo la nostra navbar!
-    
-    3) come abbiamo fatto in App.jsx importiamo navbar sempre come prima riga
-    import Navbar from "./components/Navbar";
+export default Defaultlayout
+```
 
-    4) sempre dentro al <> </> e sopra <Outlet></Outlet> ci inseriamo 
-    <Navbar></Navbar>
+adesso abbiamo inserito nel layout il router, ma è vuoto a livello di contenuto... questo perchè adesso ci metteremo la nostra navbar!
 
-    5) ora che abbiamo il Defaultlayout con la navbar, rimuoviamo Navbar (sia import che <Navbar></Navbar>) da app.jsx e ci inseriamo il Defaultlayout:
+3. come abbiamo fatto in `App.jsx` importiamo navbar sempre come prima riga
 
-        1) importiamo Defaultlayout.jsx in app.jsx attraverso 
-        import Defaultlayout from "./layouts/Defaultlayout"
+```jsx
+import Navbar from "./components/Navbar";
+```
 
-        2) ora creiamo il seguente:
+4. sempre dentro al `<> </>` e sopra `<Outlet></Outlet>` ci inseriamo
 
-        <BrowserRouter>
-            <Routes>
-                <Route element={<Defaultlayout></Defaultlayout>}>
-                </Route>
-            </Routes>
-        </BrowserRouter>
+```jsx
+<Navbar></Navbar>
+```
 
-        INFO!
+5. ora che abbiamo il `Defaultlayout` con la navbar, rimuoviamo `Navbar` (sia import che `<Navbar></Navbar>`) da `app.jsx` e ci inseriamo il `Defaultlayout`:
 
-        cosa fanno BrowserRouter, Routes e Route?
+6. importiamo `Defaultlayout.jsx` in `app.jsx` attraverso
 
-          1) BrowserRouter -> Gestisce l'intera logica di routing dell'app, ovvero tutti i componenti al suo interno
+```jsx
+import Defaultlayout from "./layouts/Defaultlayout"
+```
 
-          2) Routes -> è il contenitore delle varie route che metteremo al suo interno
+2. ora creiamo il seguente:
 
-          3) Route -> gestisce la visibilità del singola pagina una volta che abbiamo eseguito la sua path (come tipo "/" o "/about", etc.)
+```jsx
+<BrowserRouter>
+    <Routes>
+        <Route element={<Defaultlayout></Defaultlayout>}>
+        </Route>
+    </Routes>
+</BrowserRouter>
+```
 
+**INFO!**
 
-        in questo modo ora l'elemento Defaultlayout ha a disposizione la possibilità di navigare tra le pagine dei componenti al suo interno
+cosa fanno `BrowserRouter`, `Routes` e `Route`?
 
-        ma al momento non abbiamo neanche un collegamento che porta ad una determinata pagina (infatti ora abbiamo 0 collegamenti di route....)
+1. `BrowserRouter` -> Gestisce l'intera logica di routing dell'app, ovvero tutti i componenti al suo interno
 
-        l'esercizio attuale, è quello di creare le 2 seguenti pagine:
-        
-        1) Homepage.jsx che contiene la lista dei libri 
-        
-        2) SingleMovie.jsx, che comprenderà solo il        dettaglio di 1 singolo libro (il singolo libro sarà scelto in base al libro cliccato)
+2. `Routes` -> è il contenitore delle varie route che metteremo al suo interno
 
-        quindi...
+3. `Route` -> gestisce la visibilità del singola pagina una volta che abbiamo eseguito la sua path (come tipo `/` o `/about`, etc.)
 
-___________________________________________________________
+in questo modo ora l'elemento Defaultlayout ha a disposizione la possibilità di navigare tra le pagine dei componenti al suo interno
 
-11) PAGINE 
+ma al momento non abbiamo neanche un collegamento che porta ad una determinata pagina (infatti ora abbiamo 0 collegamenti di route....)
 
-    iniziamo col creare 2 pagine, che tramite l'uso delle route saranno raggiungibili!
+l'esercizio attuale, è quello di creare le 2 seguenti pagine:
 
-    1)  creiamo un folder "pages", in cui ci inseriamo le varie pagine in cui vogliamo navigare
+1. `Homepage.jsx` che contiene la lista dei libri
 
-    2) creiamo la prima pagina, ovvero la Homepage, creando un nuovo file dentro il folder pages, chiamato Homepage.jsx
+2. `SingleMovie.jsx`, che comprenderà solo il dettaglio di 1 singolo libro (il singolo libro sarà scelto in base al libro cliccato)
 
-    3) dentro a Homepage.jsx eseguiamo sempre rafce, che farà comparire questo scritto:
+quindi...
 
-        const Homepage = () => {
-            return (
-                <div className="text-center fs-1 fw.bold mb-5">Homepage</div>
-            )
-        }
+---
 
-        export default Homepage
+## 11) PAGINE
 
-    4) creato lo scheletro della Homepage, facciamo in modo che sia visibile nella pagina, quindi in app.jsx, importiamo Homepage.jsx sopra con tutti gli import già messi, e dentro a <Route element={<Defaultlayout></Defaultlayout>}>, ci andiamo ad inserire:
+iniziamo col creare 2 pagine, che tramite l'uso delle route saranno raggiungibili!
 
-    <Route path="/" element={<Homepage></Homepage>}></Route>
+1. creiamo un folder `pages`, in cui ci inseriamo le varie pagine in cui vogliamo navigare
 
-    cosi facendo, ogni volta che saremo nella path iniziale della pagina (siccome abbiamo messo come path "/"), apparirà la homepage!
+2. creiamo la prima pagina, ovvero la `Homepage`, creando un nuovo file dentro il folder pages, chiamato `Homepage.jsx`
 
-    ora non ci resta che creare SingleMovie.jsx, eseguire di nuovo rafce per creare il suo scheletro e importarlo in app.jsx, sempre con l'uso dell'import.
+3. dentro a `Homepage.jsx` eseguiamo sempre `rafce`, che farà comparire questo scritto:
 
-    ora però dobbiamo considerare che non è necessario creare un'altra path (perchè alla fine rimaniamo sempre nella pagina principale, ma mostrando solo un'elemento!), quindi andiamo a spezzettare ciò in questa maniera:
+```jsx
+const Homepage = () => {
+    return (
+        <div className="text-center fs-1 fw.bold mb-5">Homepage</div>
+    )
+}
 
-    <Route path="/">
-        <Route path = "" element={<Homepage></Homepage>}></Route>
-        <Route path = ":id" element={<SingleMovie></SingleMovie>}></Route>
-    </Route>
+export default Homepage
+```
 
-    cosa abbiamo fatto?
+4. creato lo scheletro della Homepage, facciamo in modo che sia visibile nella pagina, quindi in `app.jsx`, importiamo `Homepage.jsx` sopra con tutti gli import già messi, e dentro a
+   `<Route element={<Defaultlayout></Defaultlayout>}>`, ci andiamo ad inserire:
 
-    abbiamo una path unica, dove la pagina principale è homepage, ma se in futuro, dopo aver messo il lato logico, cliccheremo un libro, passeremo direttamente a vedere il SingleMovie
+```jsx
+<Route path="/" element={<Homepage></Homepage>}></Route>
+```
 
-    inizia col sbizzarrirti col html e css per la struttura grafica della homepage!
+così facendo, ogni volta che saremo nella path iniziale della pagina (siccome abbiamo messo come path "/"), apparirà la homepage!
 
-    se ti serve ti metto un'esempio!
+ora non ci resta che creare `SingleMovie.jsx`, eseguire di nuovo `rafce` per creare il suo scheletro e importarlo in `app.jsx`, sempre con l'uso dell'import.
 
-    1) HOMEPAGE:
+ora però dobbiamo considerare che non è necessario creare un'altra path (perchè alla fine rimaniamo sempre nella pagina principale, ma mostrando solo un'elemento!), quindi andiamo a spezzettare ciò in questa maniera:
 
-    const Homepage = () => {
-        return ()
-            <div className="container my-5">
-                <div className="row">
-                    <div className="col-12 text-center">
-                        <h1>Bookly</h1>
-                        <h2>
-                            <i>Libri per i veri appassionati</i>
-                        </h2>
-                    </div>
-                </div>
-                <div className="row gy-3">
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <div className="card">
-                            <img src="./img/sample.jpg" alt="libro" />
-                            <div className="overlay">
-                                <h2 className="text-center my-3">Titolo</h2>
-                                <p className="text-center">Autore</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <div className="card">
-                            <img src="./img/sample.jpg" alt="libro" />
-                            <div className="overlay">
-                                <h2 className="text-center my-3">Titolo</h2>
-                                <p className="text-center">Autore</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <div className="card">
-                            <img src="./img/sample.jpg" alt="libro" />
-                            <div className="overlay">
-                                <h2 className="text-center my-3">Titolo</h2>
-                                <p className="text-center">Autore</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <div className="card">
-                            <img src="./img/sample.jpg" alt="libro" />
-                            <div className="overlay">
-                                <h2 className="text-center my-3">Titolo</h2>
-                                <p className="text-center">Autore</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-4">
-                        <div className="card">
-                            <img src="./img/sample.jpg" alt="libro" />
-                            <div className="overlay">
-                                <h2 className="text-center my-3">Titolo</h2>
-                                <p className="text-center">Autore</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+```jsx
+<Route path="/">
+    <Route path = "" element={<Homepage></Homepage>}></Route>
+    <Route path = ":id" element={<SingleMovie></SingleMovie>}></Route>
+</Route>
+```
 
-    export default Homepage
+cosa abbiamo fatto?
 
-    NOTA! qui ho creato nella cartella public una cartella img contenente un img.jpg chiamato sample.jpg (se non hai 1 immagine, scaricane 1 dal web, la rinomi come vuoi e la metti dentro la cartella, poi dentro img src = "./img/nomeFoto.jpg" o png se hai scaricato la foto in formato png)
+abbiamo una path unica, dove la pagina principale è homepage, ma se in futuro, dopo aver messo il lato logico, cliccheremo un libro, passeremo direttamente a vedere il `SingleMovie`
 
-    ________________________
+inizia col sbizzarrirti col html e css per la struttura grafica della homepage!
 
-    2) NAVBAR -> rimosso qualche elemento non necessario per l'esercizio e aggiunto qualche stile grafico!
+se ti serve ti metto un'esempio!
 
-    const Navbar = () => {
-        return (
-            <header className="bg-orange">
-                <h1>Questa è la navbar!</h1>
-            </header>
-        )
-    }
+### 1) HOMEPAGE (esempio)
 
-    export default Navbar
-    ________________________
-
-    3) INDEX.CSS -> ci ho aggiunto di mio qualche elemento di css dentro index.css:
-
-    .bg-orange{
-        background-color: #a37230;
-        text-align: center;
-    }
-
-    header{
-        height: 80px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    header h1{
-        color: white !important;
-    }
-
-    h1, h2, h3, h4, h5, h6{
-        color: #a37230 !important;
-    }
-
-    body{
-        font-family: sans-serif;
-    }
-
-    ________________________
-
-fatto ciò abbiamo un vero e proprio scheletro della nostra homepage, con 5 card dei """libri""".
-
-ma ora vediamo di inserire la nostra vera lista di libri, usando il database che abbiamo creato!
-
-___________________________________________________________
-
-12) AXIOS E USESTATE/USEEFFECT
-
-iniziamo ad includere all'interno di homepage i seguenti import:
-
-   1)  import axios from "axios" 
-   
-la libreria axios, serve per fare le chiamate HTTP (GET, POST, PUT, DELETE, ecc.) verso un server o un’API (in questo caso ci riferiremo al database)
-
-   2) import { useState, useEffect } from "react" 
-
-ci sono qui 2 librerie:
-    
-- useState -> Serve per salvare e cambiare un valore dentro al componente. 
-    
-- useEffect -> Serve per fare qualcosa quando il componente si carica o cambia stato.
-
-ora dentro a const HomePage e prima del return, andiamo ad eseguiamo i seguenti passaggi:
-
-1) dichiariamo le variabili di stato, attraverso
-
-    const [books, setBooks] = useState ([])
-
-    dove books sarà il contenitore, mentre setBooks sarà la function che modificherà o inserirà i libri nella pagina
-
-2) ora recuperiamo i libri nel database attraverso la chiamata ajax, che verrà eseguita alla chiamata della function fetchBooks!
-
-    const fetchBooks = () => {
-        axios.get("http://localhost:3000/books")
-    };
-
-http://localhost:3000/books se ricordi, era la chiamata che facevamo con postman (quindi se non è uguale per te, copia direttamente il protocollo che hai nel get di index)
-
-3) recuperiamo, li dobbiamo settare come response, quindi continuando la chiamata ajax:
-
-    const fetchBooks = () => {
-        axios.get("http://localhost:3000/books")
-        .then((resp) => {
-            setBooks(resp.data);
-        })
-        .catch((err) => console.log(err));
-    };
-
-nel .then recuperiamo la lista di libri e la mettiamo nei books (attraverso setBooks), il cui value sarà la value entro axios.get (e come se fosse la chiamata query che abbiamo fatto su postman, ma con la differenza che qui salviamo i valori!)
-
-4) creiamo un useEffect per richiamare la function, alla prima esecuzione del progetto e ogni volta che viene eseguita una modifica!
-
-    useEffect(fetchBooks, [])
-
-vogliamo vedere se cicla i libri presenti nel database? 
-
-scriviamo sotto setBooks(resp.data);
-
-console.log(resp.data);
-
-avviamo sia books_page che il progetto backend che abbiamo preparato prima, apriamo anche il database in mysql (se non lo hai gia aperto), entriamo nella connection che avevamo creato, entriamo nella pagina localhost aperta qui, clicchiamo f12 per vedere se ci mostra la lista di libri, eeeeeeeeee.....
-
-Access to XMLHttpRequest at 'http://localhost:3000/books' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-
-comparirà questo errore.... MA PERCHE?
-
-perchè il browser sta bloccando la richiesta, poichè ci sono due origini diverse (porte diverse = origini diverse).
-
-Per permettere la comunicazione, dobbiamo fare in modo che la parte backend accetti richieste dalla parte del frontend!
-__________________________________________________________
-
-
-per fare ciò dobbiamo tornare nel progetto backend, e fare un passaggio per farli comunicare tra loro!
-
-da li parti al passaggio 13!
-
-__________________________________________________________
-
-
-14) LISTA.MAP
-
-adesso cicliamo ogni singolo elemento presente nel database e mostriamo nella pagina!
-
-abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e per fare questo cicliamo la lista del database con un mapping (.map), dove prenderà ogni elemento presente nella lista, con i value che poi vogliamo vedere!
-
-   1) torniamo in Homepage.jsx e teniamoci solo:
-
-   return (
+```jsx
+const Homepage = () => {
+    return ()
         <div className="container my-5">
             <div className="row">
                 <div className="col-12 text-center">
@@ -431,427 +273,713 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
                     </h2>
                 </div>
             </div>
-        </div>
-    )
-
-    modifichiamolo:
-
-    2) sotto il div contenente il row, aggiungiamoci un'altro row, come questo:
-
-    <div classname = "row gy-3"></div>
-
-    3) dentro a questo container inseriamoci il ciclo del .map
-
-    come? cosi!
-
-    {books.map(book => {
-        return(
-            {/* contenuto loopato! */}
-        )
-    })}
-
-    in questo modo loopiamo il contenuto presente nel return!
-
-    4) dentro adesso al return inseriamo i dati che vogliamo inserire e loopare!
-
-    return(
-        <div className="col-12 col-md-6 col-lg-4">
-            <div className="card">
-                <img src="./img/sample.jpg" alt="libro" />
-                <div className="overlay">
-                    <h2 className="text-center my-3">Titolo</h2>
-                    <p className="text-center">Autore</p>
-                </div>
-            </div>
-        </div>
-    )
-
-    5) modifichiamo i valori presenti qui!
-
-        1) nel primo div con col.12, dopo classname aggiungiamo:
-
-        key = {book.id}
-
-        questo identificherà quale libro inserire (li ordinerà in ordine cronologico dell'id!)
-
-        2) nell'img, in src inseriamo:
-
-        src = {book.image}
-        alt = {book.author}
-
-        questo metterà:
-
-        - immagine del libro con id = presente
-
-        - nome autore che troveremo se inspezioniamo l'immagine
-
-        3) nel div contenente la class overlay, inseriamo i seguenti:
-
-            1) nell'h2 ci sarà
-
-            <h2>{books.title}</h2>
-
-            2) nel p ci sarà
-
-            <p>{books.author}</p>
-
-        in questo modo avremo il nome del libro e l'autore dell'libro in base all'id che stiamo ciclando!
-
-
-        ora abbiamo il lato FRONT-END con le tabelle visibili!
-
-
-        EXTRA: PROPS
-
-        facciamo in modo che la card sia un'elemento richiamabile, in modo tale che se dobbiamo metterla da un'altra parte, basta richiamare l'elemento senza riscriverlo tutto!
-
-        questa chiamata si chiama PROPS!
-
-        quindi:
-
-        1) in components creiamo il file BookCard.jsx
-
-        2) creiamo una constante chiamata BookCard, il cui contenuto sarà book (singolo elemento del libro cercato nel db in base all'id):
-
-        const BookCard = ({ book }) =>{
-            {/* CONTENUTO */}
-        }
-
-        export default BookCard
-
-        3) qui dentro ci creiamo l'oggetto book con il destructoring degli elementi del database che vogliamo:
-
-        const { title, image, author } = book
-
-        4) in Homepage.jsx, tagliamo questo contenuto:
-
-        <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
-            <div className="card">
-                <img 
-                    src = {book.image}
-                    className="img-fluid"
-                    alt = {book.author} 
-                />
-                <div className="overlay">
-                    <h2 className="text-center my-3">{book.title}</h2>
-                    <p className="text-center">{book.author}</p>
-                </div>
-            </div>
-        </div>
-
-        e lo mettiamo dentro ad un return in bookcard.jsx:
-
-        return (
-            <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
-                <div className="card">
-                    <img 
-                        src = {image}
-                        className="card-img"
-                        alt = {author} 
-                    />
-                    <div className="overlay">
-                        <h2 className="text-center my-3">{book.title}</h2>
-                        <p className="text-center">{author}</p>
+            <div className="row gy-3">
+                <div className="col-12 col-md-6 col-lg-4">
+                    <div className="card">
+                        <img src="./img/sample.jpg" alt="libro" />
+                        <div className="overlay">
+                            <h2 className="text-center my-3">Titolo</h2>
+                            <p className="text-center">Autore</p>
+                        </div>
                     </div>
                 </div>
+                <!-- altre card... -->
             </div>
-        )
+        </div>
+    )
+}
 
-        ho aggiunto anche un contenuto nell' index.css!
+export default Homepage
+```
 
-            .card-img {
-                max-width: 600px;          
-                height: 600px;        
-                object-fit: contain;   
-                background-color: #f0f0f0; 
-                display: block;
-            }
+**NOTA!** qui ho creato nella cartella `public` una cartella `img` contenente un `img.jpg` chiamato `sample.jpg` (se non hai 1 immagine, scaricane 1 dal web, la rinomi come vuoi e la metti dentro la cartella, poi dentro `img src = "./img/nomeFoto.jpg"` o `png` se hai scaricato la foto in formato png)
 
-        NOTA: siccome qui abbiamo usato il destructoring, non abbiamo più bisogno di dichiarare il elemento.value, ma solo il value!
+---
 
-        5) in Homepage.jsx, importiamo Bookcard.jsx, e dentro al mapping, dove prima ci stava il contenuto della card, al suo interno mettiamo:
-        const { id } = book;
-        return <Bookcard key={id} book={book}></Bookcard> 
+### 2) NAVBAR -> esempio semplificato
 
-        quindi, in homepage prendiamo sempre l'id nel .map e tramite la props lo passiamo come value in Bookcard.jsx per visualizzare la card in base all'id, questo finche non visualizza tutti gli id nel database!
+```jsx
+const Navbar = () => {
+    return (
+        <header className="bg-orange">
+            <h1>Questa è la navbar!</h1>
+        </header>
+    )
+}
 
-        in questo modo, adesso abbiamo una props che possiamo richiamare quando vogliamo se vogliamo creare la card con quei elementi!
+export default Navbar
+```
 
-___________________________________________________________
+### 3) `index.css` -> esempi di stili aggiunti
 
-15) SINGLECARD (LINK)
+```css
+.bg-orange{
+    background-color: #a37230;
+    text-align: center;
+}
 
-    ora facciamo in modo tale che le card diventino cliccabili, e con il click entrino nella pagina che avevamo creato all'inizio (Singlebook.jsx), con la card singola e, sotto le recensioni del libro!
+header{
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    1) in Bookcard importiamo Link:
+header h1{
+    color: white !important;
+}
 
-        import { Link } from "react-router-dom";
+h1, h2, h3, h4, h5, h6{
+    color: #a37230 !important;
+}
 
-    2) nella const, dove facciamo il destructoring:
+body{
+    font-family: sans-serif;
+}
+```
 
-        const {title, image, author } = book
+fatto ciò abbiamo un vero e proprio scheletro della nostra homepage, con 5 card dei """libri""".
 
-        ci aggiungiamo id:
+ma ora vediamo di inserire la nostra vera lista di libri, usando il database che abbiamo creato!
 
-        const {id, title, image, author } = book
+---
 
-    3) dentro alla card creata, mettiamo tutto il suo contenuto dentro a <Link></Link>:
+## 12) AXIOS E useState / useEffect
 
-        <Link className="text-decoration-none" to={`/${id}`}>
+iniziamo ad includere all'interno di `Homepage` i seguenti import:
 
-    il {`/${id}`} ci servirà per passare nella pagina SingleBook, attravero il link che abbiamo impostato in app.jsx, ovvero questo!
+```jsx
+import axios from "axios"
+import { useState, useEffect } from "react"
+```
 
-    <Route path = ":id" element={<SingleBook></SingleBook>}></Route>
+la libreria axios serve per fare le chiamate HTTP (GET, POST, PUT, DELETE, ecc.) verso un server o un’API (in questo caso ci riferiremo al database)
 
-    ora abbiamo una route che usa questo link!
-    iniziamo col creare la pagina Singlebook!
+`useState` -> Serve per salvare e cambiare un valore dentro al componente.
 
-    4) in Singlebook iniziamo col importare i seguenti:
+`useEffect` -> Serve per fare qualcosa quando il componente si carica o cambia stato.
 
-    import axios from "axios"
-    import { useState, useEffect } from "react"
-    import { useParams, useNavigate} from "react-router-dom"
+ora dentro a `const Homepage` e prima del `return`, andiamo ad eseguire i seguenti passaggi:
 
-    useNavigate ci servirà dopo!
+1. dichiariamo le variabili di stato, attraverso
 
-    5) dichiariamo le constanti dentro a const SingleBook, per poi dopo mostrare la card specifica!
+```jsx
+const [books, setBooks] = useState([])
+```
 
-    const { id } = useParams();
-    const [book, setBook] = useState([]);
-    const [totalBooks, setTotalBooks] = useState();
+2. ora recuperiamo i libri nel database attraverso la chiamata ajax, che verrà eseguita alla chiamata della function `fetchBooks`:
 
-    6) come nella homepage, facciamo il fetchBook, ma con la differenza che, la nostra chiamata axios avrà in più l'id:
+```jsx
+const fetchBooks = () => {
+    axios.get("http://localhost:3000/books")
+};
+```
 
-    axios.get(`http://localhost:3000/books/${id}`)
+3. recuperiamo, li dobbiamo settare come response, quindi continuando la chiamata ajax:
 
-    in questo modo, noi entriamo nella pagina /valoreId
-    creiamo ora l'html!
+```jsx
+const fetchBooks = () => {
+    axios.get("http://localhost:3000/books")
+    .then((resp) => {
+        setBooks(resp.data);
+    })
+    .catch((err) => console.log(err));
+};
+```
 
-    7) dentro al return creiamo il nostro html
+nel `.then` recuperiamo la lista di libri e la mettiamo nei `books` (attraverso `setBooks`), il cui value sarà la value entro `axios.get` (e come se fosse la chiamata query che abbiamo fatto su postman, ma con la differenza che qui salviamo i valori!)
 
-    esempio:
+4. creiamo un `useEffect` per richiamare la function, alla prima esecuzione del progetto e ogni volta che viene eseguita una modifica!
 
+```jsx
+useEffect(fetchBooks, [])
+```
+
+vogliamo vedere se cicla i libri presenti nel database? scriviamo sotto `setBooks(resp.data);`
+
+```jsx
+console.log(resp.data);
+```
+
+avviamo sia `books_page` che il progetto backend che abbiamo preparato prima, apriamo anche il database in mysql (se non lo hai gia aperto), entriamo nella connection che avevamo creato, entriamo nella pagina localhost aperta qui, clicchiamo f12 per vedere se ci mostra la lista di libri, eeeeeeeeee.....
+
+**Errore CORS possibile:**
+
+```
+Access to XMLHttpRequest at 'http://localhost:3000/books' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+comparirà questo errore.... MA PERCHE?
+
+perchè il browser sta bloccando la richiesta, poichè ci sono due origini diverse (porte diverse = origini diverse).
+
+Per permettere la comunicazione, dobbiamo fare in modo che la parte backend accetti richieste dalla parte del frontend!
+
+---
+
+**Nota:** per risolvere bisogna modificare il backend (esempio: abilitare CORS nelle impostazioni del server) — da lì parti al passaggio 13 (non incluso qui).
+
+---
+
+## 14) LISTA.MAP
+
+adesso cicliamo ogni singolo elemento presente nel database e mostriamo nella pagina!
+
+abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e per fare questo cicliamo la lista del database con un mapping (`.map`), dove prenderà ogni elemento presente nella lista, con i value che poi vogliamo vedere!
+
+1. torniamo in `Homepage.jsx` e teniamoci solo:
+
+```jsx
+return (
     <div className="container my-5">
-        <div className="row mb-100">
+        <div className="row">
             <div className="col-12 text-center">
                 <h1>Bookly</h1>
                 <h2>
-                    <i>Libri per i veri appassionati!</i>
+                    <i>Libri per i veri appassionati</i>
                 </h2>
             </div>
         </div>
-        <div className="row gy-3">
-            <div className="col-12">
-                <div className="card medium-card">
-                <img 
-                    src = {"./img/sample.jpg"} 
-                    className="img-fluid"
-                    alt = {book.author} 
-                />
-                    <div className="overlay">
-                    <h2 className="text-center my-3">{book.title}</h2>
-                    <p className="text-center">{book.author}</p>
-                    </div>
+    </div>
+)
+```
+
+modifichiamolo:
+
+2. sotto il div contenente il `row`, aggiungiamoci un'altro `row`, come questo:
+
+```jsx
+<div classname = "row gy-3"></div>
+```
+
+3. dentro a questo container inseriamoci il ciclo del `.map`
+
+```jsx
+{books.map(book => {
+    return(
+        {/* contenuto loopato! */}
+    )
+})}
+```
+
+4. dentro adesso al `return` inseriamo i dati che vogliamo inserire e loopare!
+
+```jsx
+return(
+    <div className="col-12 col-md-6 col-lg-4">
+        <div className="card">
+            <img src="./img/sample.jpg" alt="libro" />
+            <div className="overlay">
+                <h2 className="text-center my-3">Titolo</h2>
+                <p className="text-center">Autore</p>
+            </div>
+        </div>
+    </div>
+)
+```
+
+5. modifichiamo i valori presenti qui!
+
+* nel primo div con `col.12`, dopo `classname` aggiungiamo:
+
+```jsx
+key = {book.id}
+```
+
+* nell'`img`, in `src` inseriamo:
+
+```jsx
+src = {book.image}
+alt = {book.author}
+```
+
+* nel div contenente la class `overlay`, inseriamo i seguenti:
+
+```jsx
+<h2>{book.title}</h2>
+<p>{book.author}</p>
+```
+
+in questo modo avremo il nome del libro e l'autore dell'libro in base all'id che stiamo ciclando!
+
+**EXTRA: PROPS**
+
+facciamo in modo che la card sia un'elemento richiamabile, in modo tale che se dobbiamo metterla da un'altra parte, basta richiamare l'elemento senza riscriverlo tutto!
+
+1. in `components` creiamo il file `BookCard.jsx`
+
+2. creiamo una constante chiamata `BookCard`, il cui contenuto sarà `book` (singolo elemento del libro cercato nel db in base all'id):
+
+```jsx
+const BookCard = ({ book }) =>{
+    {/* CONTENUTO */}
+}
+
+export default BookCard
+```
+
+3. qui dentro ci creiamo l'oggetto `book` con il destructoring degli elementi del database che vogliamo:
+
+```jsx
+const { title, image, author } = book
+```
+
+4. in `Homepage.jsx`, tagliamo il contenuto della card e lo mettiamo dentro ad un return in `BookCard.jsx`:
+
+```jsx
+return (
+    <div className="col-12 col-md-6 col-lg-4" key = {book.id}>
+        <div className="card">
+            <img
+                src = {image}
+                className="card-img"
+                alt = {author}
+            />
+            <div className="overlay">
+                <h2 className="text-center my-3">{book.title}</h2>
+                <p className="text-center">{author}</p>
+            </div>
+        </div>
+    </div>
+)
+```
+
+ho aggiunto anche un contenuto nell' `index.css`:
+
+```css
+.card-img {
+    max-width: 600px;          
+    height: 600px;        
+    object-fit: contain;   
+    background-color: #f0f0f0;
+    display: block;
+}
+```
+
+5. in `Homepage.jsx`, importiamo `BookCard.jsx`, e dentro al mapping, dove prima ci stava il contenuto della card, al suo interno mettiamo:
+
+```jsx
+const { id } = book;
+return <Bookcard key={id} book={book}></Bookcard>
+```
+
+in questo modo, adesso abbiamo una props che possiamo richiamare quando vogliamo se vogliamo creare la card con quei elementi!
+
+---
+
+## 15) SINGLECARD (LINK)
+
+ora facciamo in modo tale che le card diventino cliccabili, e con il click entrino nella pagina che avevamo creato all'inizio (`SingleBook.jsx`), con la card singola e, sotto, le recensioni del libro!
+
+1. in `BookCard` importiamo `Link`:
+
+```jsx
+import { Link } from "react-router-dom";
+```
+
+2. nella const, dove facciamo il destructoring:
+
+```jsx
+const {title, image, author } = book
+```
+
+ci aggiungiamo `id`:
+
+```jsx
+const {id, title, image, author } = book
+```
+
+3. dentro alla card creata, mettiamo tutto il suo contenuto dentro a `<Link></Link>`:
+
+```jsx
+<Link className="text-decoration-none" to={`/${id}`}>
+    {/* contenuto card */}
+</Link>
+```
+
+il `{`/\${id}`}` ci servirà per passare nella pagina `SingleBook`, attraverso il link che abbiamo impostato in `app.jsx`, ovvero questo:
+
+```jsx
+<Route path = ":id" element={<SingleBook></SingleBook>}></Route>
+```
+
+4. in `SingleBook` iniziamo col importare i seguenti:
+
+```jsx
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { useParams, useNavigate} from "react-router-dom"
+```
+
+`useNavigate` ci servirà dopo!
+
+5. dichiariamo le constanti dentro a `const SingleBook`, per poi dopo mostrare la card specifica!
+
+```jsx
+const { id } = useParams();
+const [book, setBook] = useState([]);
+const [totalBooks, setTotalBooks] = useState();
+```
+
+6. come nella homepage, facciamo il `fetchBook`, ma con la differenza che, la nostra chiamata axios avrà in più l'id:
+
+```jsx
+axios.get(`http://localhost:3000/books/${id}`)
+```
+
+in questo modo, noi entriamo nella pagina `/valoreId`
+
+7. dentro al `return` creiamo il nostro html
+
+esempio:
+
+```jsx
+<div className="container my-5">
+    <div className="row mb-100">
+        <div className="col-12 text-center">
+            <h1>Bookly</h1>
+            <h2>
+                <i>Libri per i veri appassionati!</i>
+            </h2>
+        </div>
+    </div>
+    <div className="row gy-3">
+        <div className="col-12">
+            <div className="card medium-card">
+            <img
+                src = {"./img/sample.jpg"}
+                className="img-fluid"
+                alt = {book.author}
+            />
+                <div className="overlay">
+                <h2 className="text-center my-3">{book.title}</h2>
+                <p className="text-center">{book.author}</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+```
 
-    praticamente simile a come abbiamo fatto la Homepage!
+ho aggiunto anche qualcosina nell'`index.css`:
 
-    ho aggiunto anche qualcosina nell'index.css:
+```css
+.medium-card {
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-    .medium-card {
-        max-width: 700px;
-        margin: 0 auto;
-    }
+.medium-card img {
+    max-height: 700px;
+    object-fit: cover;
+}
+```
 
-    .medium-card img {
-        max-height: 700px;
-        object-fit: cover;
-    }
+**EXTRA:** Se vuoi, possiamo fare anche che la card singola si richiami con un'altra props!
 
+1. basta creare in `components` un'altro file chiamato ad esempio `Bookcard_selected.jsx`, e al suo interno ci mettiamo tutto quello che ci sta dentro al `<div className="row gy-3">`!
 
-    EXTRA: Se vuoi, possiamo fare anche che la card singola si richiami con un'altra props!
+esempio:
 
-       1) basta creare in components un'altro file chiamato ad esempio Bookcard_selected, e al suo interno ci mettiamo tutto quello che ci sta dentro al <div className="row gy-3">!
-
-        struttura d'esempio:
-
-    _______
-
-        const Bookcard_selected = ({book}) => {
-            const {id, title, image, author } = book
-            return (
-                <div className="col-12">
-                    <div className="card medium-card">
-                    <img 
-                        src = {"./img/sample.jpg"} 
-                        className="img-fluid"
-                        alt = {author} 
-                    />
-                        <div className="overlay">
-                        <h2 className="text-center my-3">{title}</h2>
-                        <p className="text-center">{author}</p>
-                        </div>
-                    </div>
+```jsx
+const Bookcard_selected = ({book}) => {
+    const {id, title, image, author } = book
+    return (
+        <div className="col-12">
+            <div className="card medium-card">
+            <img
+                src = {"./img/sample.jpg"}
+                className="img-fluid"
+                alt = {author}
+            />
+                <div className="overlay">
+                <h2 className="text-center my-3">{title}</h2>
+                <p className="text-center">{author}</p>
                 </div>
-            )
-        }
-
-        export default Bookcard_selected
-
-       2) in SingleBook.jsx eseguiamo l'import della props:
-        
-            import Bookcard_selected from "../components/Bookcard_selected"
-
-        3) poi rimpiazziamo il contenuto di:
-        
-        <div className="row gy-3">
-
-        in questo!
-
-        <div className="row gy-3">
-            <Bookcard_selected key={id} book={book}></Bookcard_selected>
+            </div>
         </div>
+    )
+}
 
-    
+export default Bookcard_selected
+```
 
-    ora abbiamo una pagina visibile, che col click di un libro presente nella homepage, mi porta nella pagina singola, con il libro singolo!
+2. in `SingleBook.jsx` eseguiamo l'import della props:
 
-___________________________________________________________
+```jsx
+import Bookcard_selected from "../components/Bookcard_selected"
+```
 
-16) BUTTON (GO NEXT PAGE, GO PREVIOUS PAGE, GO HOMEPAGE)
+3. poi rimpiazziamo il contenuto di:
 
-    un'altra funzionalità che possiamo implementare nel nostro progetto della card singola è l'uso dei bottoni che, con il click di uno di questi eseguira un'azione specifica (in questo caso andare al libro successivo/precedente della lista o tornare alla homepage con tutti i libri visibili)!
+```jsx
+<div className="row gy-3">
+```
 
-    ecco come fare!
+in questo!
 
-    1) adesso sfrutteremo lo useNavigate che abbiamo implementato prima, creando una variabile fissa chiamata naviga, che userà lo useNavigate!
+```jsx
+<div className="row gy-3">
+    <Bookcard_selected key={id} book={book}></Bookcard_selected>
+</div>
+```
 
-        const naviga = useNavigate();
+ora abbiamo una pagina visibile, che col click di un libro presente nella homepage, mi porta nella pagina singola, con il libro singolo!
 
-    2) creata la chiamata allo useNavigate, creiamo 3 function diverse!
+---
 
-    - goPrevPage:
+## 16) BUTTON (GO NEXT PAGE, GO PREVIOUS PAGE, GO HOMEPAGE)
 
-        const goPrevPage = () => {
-            const page = parseInt(id) - 1;
-            naviga("/" +page);
-        }
+un'altra funzionalità che possiamo implementare nel nostro progetto della card singola è l'uso dei bottoni che, con il click di uno di questi eseguira un'azione specifica (in questo caso andare al libro successivo/precedente della lista o tornare alla homepage con tutti i libri visibili)!
 
-    - goNextPage
+1. adesso sfrutteremo lo `useNavigate` che abbiamo implementato prima, creando una variabile fissa chiamata `naviga`, che userà lo `useNavigate`!
 
-        const goNextPage = () => {
-            const page = parseInt(id) + 1;
-            naviga("/" +page);
-        }
+```jsx
+const naviga = useNavigate();
+```
 
-    - goHomepage
+2. creata la chiamata allo `useNavigate`, creiamo 3 function diverse!
 
-        const goHomepage = () => {
-            naviga("/");
-        }
+* `goPrevPage`:
 
-    queste ci serviranno poi per cambiare la pagina!
+```jsx
+const goPrevPage = () => {
+    const page = parseInt(id) - 1;
+    naviga("/" +page);
+}
+```
 
-    come funziona?
+* `goNextPage`:
 
-       1) goHomepage andrà direttamente al link "/", che in app.js è la homepage
+```jsx
+const goNextPage = () => {
+    const page = parseInt(id) + 1;
+    naviga("/" +page);
+}
+```
 
-       2) goPrevPage e goNextPage sfruttano l'id che abbiamo per incrementarlo o decrementarlo!
+* `goHomepage`:
 
-       se ad esempio noi stiamo nella pagina "/1", con il goNextPage andremo in "/2" e viceversa, ovvero con il goPrevPage da che stiamo in "/2" andremo in "/1"
+```jsx
+const goHomepage = () => {
+    naviga("/");
+}
+```
 
-    3) implementiamo una function fetchTotalBooks (sotto al fetchBook), per avere anche la length dei libri nel database!
+3. implementiamo una function `fetchTotalBooks` (sotto al `fetchBook`), per avere anche la length dei libri nel database!
 
-        const fetchTotalBooks = () => {
-            axios.get("http://localhost:3000/books")
-            .then(resp => setTotalBooks(resp.data.length))
-            .catch(err => console.log(err));
-        };
+```jsx
+const fetchTotalBooks = () => {
+    axios.get("http://localhost:3000/books")
+    .then(resp => setTotalBooks(resp.data.length))
+    .catch(err => console.log(err));
+};
+```
 
-    questo pezzo, ci servirà nel prossimo punto, capirete perchè!
+questo pezzo, ci servirà nel prossimo punto, capirete perchè!
 
-    3) adesso implementiamo 3 bottoni, che verrano usati per fare il cambio pagina!
+4. adesso implementiamo 3 bottoni, che verranno usati per fare il cambio pagina!
 
-    esempio di struttura:
+esempio di struttura:
 
-        sotto a:
+```jsx
+<div className="flex-row">
+    <button className="btn btn-primary btn-prev-next"
+        disabled={book.id === 1}
+        onClick={goPrevPage}>
+        Vai al libro precedente
+    </button>
+    <button className="btn btn-primary btn-prev-next margin-left-right-50"
+        onClick={goHomepage}>
+        Torna alla homepage
+    </button>
+    <button className="btn btn-primary btn-prev-next"
+        disabled={book.id === totalBooks}
+        onClick={goNextPage}>
+        Vai al libro successivo
+    </button>
+</div>
+```
 
-        <div className="row gy-3">
-            <Bookcard_selected key={id} book={book}></Bookcard_selected>
-        </div>
+anche qui ho inserito un po' di css!
 
-        mettiamoci:
+```css
+.btn-prev-next{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 60px;
+    width: 200px;
+}
 
-        <div className="flex-row">
-            <button className="btn btn-primary btn-prev-next"
-                disabled={book.id === 1}
-                onClick={goPrevPage}>
-                Vai al libro precedente
-            </button>
-            <button className="btn btn-primary btn-prev-next margin-left-right-50"
-                onClick={goHomepage}>
+.margin-left-right-50{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+```
+
+**NOTA!** notate qualcosa in questo html??
+
+c'è un `disabled` con una condizione — serve a disabilitare il bottone quando la condizione è vera (es. primo libro o ultimo libro)
+
+---
+
+## 17) PAGE NOT FOUND
+
+**DOMANDA:** Cosa succede se nel url del nostro sito, sapendo che il totale dei libri è 5, ci andiamo a mettere `5000`?
+
+**RISPOSTA:** Succede che carica comunque una pagina, ma noi non vogliamo quella pagina!
+
+stessa cosa se scriviamo tipo `http://localhost:3000/pippo`
+
+nella console, mostrerà l'errore, ma non ci porta da nessuna parte, e dobbiamo permettere all'utente di capire che ha sbagliato pagina!
+
+creeremo adesso una pagina dedicata al `notfound` (error 404)!
+
+1. creiamo un nuovo file in `pages`, chiamato `NotFoundPage.jsx`
+
+2. creiamoci un html al suo interno, anche con un button per tornare alla homepage!
+
+esempio:
+
+```jsx
+import { Link } from "react-router-dom"
+
+const NotFoundPage = () => {
+    return (
+        <div className='h-100 flex flex-column align-items-center justify-content-center'>
+            <h2>Page not found....</h2>
+            <p className='my-3'>La pagina cercata non esiste</p>
+            <Link className="btn btn-danger" to="/">
                 Torna alla homepage
-            </button>
-            <button className="btn btn-primary btn-prev-next"
-                disabled={book.id === totalBooks}
-                onClick={goNextPage}>
-                Vai al libro successivo
-            </button>
+            </Link>
         </div>
+    )
+}
 
-    anche qui ho inserito un po ci css!
+export default NotFoundPage
+```
 
-        .btn-prev-next{
-            margin-top: 50px;
-            margin-bottom: 50px;
-            height: 60px;
-            width: 200px;
-        }
+3. in `app.jsx` importiamo `NotFoundPage.jsx` e lo mettiamo qui:
 
-        .margin-left-right-50{
-            margin-left: 50px;
-            margin-right: 50px;
-        }
+```jsx
+<Route path="/">
+    <Route path = "" element={<Homepage></Homepage>}></Route>
+    <Route path = ":id" element={<SingleBook></SingleBook>}></Route>
+    <Route path = "*" element={<NotFoundPage></NotFoundPage>}></Route>
+</Route>
+```
 
-    NOTA! notate qualcosa in questo html??
+con l'`*`, includiamo tutte le path che possono essere scritte nel link http che non sono incluse nelle altre path della route padre!
 
-    ci stà un DISABLED con un contenuto (condizione)
+4. in `SingleBook.jsx`, nella constante `fetchBook`, si trova un `catch(err)`, ma solo con un `console.log`! cosi non funziona!
 
-    a che ci serve?
+quindi sostituiamo il `console.log` con la variabile che tiene lo `useNavigate` (nel caso mio -> `naviga`)
 
-       - serve precisamente a disabilitare il bottone una volta che la condizione nel disabled è true
+```jsx
+.catch((err) => naviga("not-found"));
+```
 
-        ad esempio:
+così facendo, ogni volta che va nel `catch`, come nell'esempio iniziale (es. cerca il libro con id 5000), anziché stare sempre nella pagina `SingleBook`, ora va in `NotFoundPage`!
 
-            disabled={book.id === 1}
+---
 
-        qui, se siamo al primo libro, non esiste il libro 0, quindi non ci sarà nessun libro prima del 1!
+## 18) REVIEWS
 
-            disabled={book.id === totalBooks}
+siccome noi nel nostro database, abbiamo anche le `reviews` del libro, inseriamole nel `SingleBook`!
 
-        ricordi che prima abbiamo creato una function fetchTotalBook?
-        ecco a cosa ci serve! ovvero se abbiamo raggiunto l'ultimo libro nella lista, allora non c'è nessun libro dopo, quindi disabilitiamo il bottone!
+1. Creiamo direttamente la component props di Reviews (qui l'ho chiamata `ReviewCard`), in `components`!
 
-    adesso abbiamo quindi dei pulsanti che ci permettono di navigare tra i libri, o per tornare alla homepage!
+2. esempio di HTML/JSX per la review:
 
-__________________________________________________________________________________________________________________________________________________
+```jsx
+const ReviewCard = ( {review} ) => {
 
-17) REVIEWS
+    const {name, text, vote} = review
+    return (
+        <div className="review-card">
+            <h3>{name}</h3>
+            <p>Voto: {vote}</p>
+            <p>{text}</p>
+        </div>
+    )
+}
 
-    
+export default ReviewCard
+```
 
-__________________________________________________________________________________________________________________________________________________
+3. in app.jsx, importiamo la ReviewCard
+
+4. creiamo il lato html della ReviewCard!
+
+esempio di html per la ReviewCard:
+
+```jsx
+    <div className="reviews">
+        {book.reviews ? 
+        (book.reviews.map((review) => {
+            return <ReviewCard review={review}></ReviewCard>
+        })):(
+        <h2>
+            <em>Non ci sono ancora recensioni per questo libro</em>
+        </h2>
+        )}
+    </div>
+```
+
+EXTRA
+
+facciamo in modo che, anziche vedere un numero, mostri le stelline nella review!
+
+5. importiamo fontawesome nel nostro programma!
+
+tramite il comando da mettere nel terminal:
+
+npm install @fortawesome/fontawesome-free
+
+6. creiamo un'altra props, chiamata StarRating.jsx
+
+7. creiamo il lato html dello StarRating!
+
+esempio di html per lo StarRating:
+
+```jsx
+    const StarRating = ({vote}) => {
+        const nums = [1, 2, 3, 4, 5];
+        const starArray = nums.map((num, i) => {
+            console.log(num, i)
+            if(i < vote){
+                return <i className="fa-solid fa-star"></i>
+            }
+            else{
+                return "";
+            }
+        })
+        return starArray
+    }
+
+    export default StarRating
+```
+
+questo const calcolerà il numero di stelle da inserire, usando l'array nums che va da 1 (1 stella) a 5 (5 stelle), e in base al valore vote che gli passiamo, farà il map, finche non trova il numero che gli abbiamo passato!
+
+per esempio, se noi abbiamo il libro con una recensione da voto 3, la ReviewCard passerà il valore { vote } => { 3 } e ritornerà 3 stelle "fa-solid fa-star"!
+
+per fare ciò però:
+
+8) implementiamo StarRating in ReviewCard:
+
+import StarRating from "./StarRating"
+
+9) dentro al p contentente il voto: {voto}, lo sostituiamo con questo:
+
+```jsx
+
+    <p>Voto: <StarRating vote={vote}></StarRating></p>
+
+```
+
+adesso, ogni recensione, anziche il numero, avrà delle stelline!
+
+---
 
 
-
-
-   
-
-
-
-
-
-    
