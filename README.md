@@ -417,7 +417,7 @@ Per permettere la comunicazione, dobbiamo fare in modo che la parte backend acce
 
 ---
 
-**Nota:** per risolvere bisogna modificare il backend (esempio: abilitare CORS nelle impostazioni del server) — da lì parti al passaggio 13 (non incluso qui).
+**Nota:** per risolvere, bisogna modificare il backend (esempio: abilitare CORS nelle impostazioni del server) — da lì parti al passaggio 13 (non incluso qui).
 
 ---
 
@@ -982,4 +982,9 @@ adesso, ogni recensione, anziche il numero, avrà delle stelline!
 
 ---
 
+**Nota:** DOMANDA: E se vogliamo inserire una nuova recensione? 
+RISPOSTA: Per fare questo, dobbiamo andare di nuovo nel back-end (ovvero nel progetto webapp-libro) e apportare delle modifiche!
+vai al passaggio 19 che si trova nell'altro progetto!
+
+---
 
