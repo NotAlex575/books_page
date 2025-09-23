@@ -8,7 +8,7 @@ const BookCard = ({ book }) =>{
                 <Link className="text-decoration-none" to={`/${id}`}>
                 <img 
                     src = {image || "./img/sample.jpg"} 
-                    className="img-fluid"
+                    className="card-img"
                     alt = {author} 
                 />
                  {/*in src al posto del link mettiamo src = {image} */}

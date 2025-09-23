@@ -53,3 +53,33 @@ body{
   max-height: 700px;
   object-fit: cover;
 }
+
+.card-img {
+  max-width: 600px;          
+  height: 600px;        
+  object-fit: contain;   
+  background-color: #f0f0f0; 
+  display: block;
+}
+
+.review-card {
+    background-color: #f5a623; 
+    padding: 20px 25px; 
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+    color: #fff; 
+    font-family: 'Arial', sans-serif;
+}
+
+.review-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.review-card p {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.5;
+}

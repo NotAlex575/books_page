@@ -226,7 +226,7 @@ ___________________________________________________________
     1) HOMEPAGE:
 
     const Homepage = () => {
-        return (
+        return ()
             <div className="container my-5">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -546,7 +546,7 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
                 <div className="card">
                     <img 
                         src = {image}
-                        className="img-fluid"
+                        className="card-img"
                         alt = {author} 
                     />
                     <div className="overlay">
@@ -556,6 +556,16 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
                 </div>
             </div>
         )
+
+        ho aggiunto anche un contenuto nell' index.css!
+
+            .card-img {
+                max-width: 600px;          
+                height: 600px;        
+                object-fit: contain;   
+                background-color: #f0f0f0; 
+                display: block;
+            }
 
         NOTA: siccome qui abbiamo usato il destructoring, non abbiamo più bisogno di dichiarare il elemento.value, ma solo il value!
 
@@ -569,7 +579,7 @@ abbiamo già fatto la chiamata ajax, ora non resta che mostrarla in pagina, e pe
 
 ___________________________________________________________
 
-15) SINGLECARD (LINK, )
+15) SINGLECARD (LINK)
 
     ora facciamo in modo tale che le card diventino cliccabili, e con il click entrino nella pagina che avevamo creato all'inizio (Singlebook.jsx), con la card singola e, sotto le recensioni del libro!
 
@@ -660,6 +670,7 @@ ___________________________________________________________
         max-height: 700px;
         object-fit: cover;
     }
+
 
     EXTRA: Se vuoi, possiamo fare anche che la card singola si richiami con un'altra props!
 
@@ -826,6 +837,13 @@ ___________________________________________________________
 
     adesso abbiamo quindi dei pulsanti che ci permettono di navigare tra i libri, o per tornare alla homepage!
 
+__________________________________________________________________________________________________________________________________________________
+
+17) REVIEWS
+
+    
+
+__________________________________________________________________________________________________________________________________________________
 
 
 

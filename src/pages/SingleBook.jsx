@@ -2,7 +2,8 @@ import axios from "axios"
 import { useParams, useNavigate} from "react-router-dom"
 import { useState, useEffect } from "react"
 import Bookcard_selected from "../components/Bookcard_selected"
-import Reviews from "../components/Reviews"
+import ReviewCard from "../components/ReviewCard"
+
 
 const SingleBook = () => {
 
@@ -16,7 +17,7 @@ const SingleBook = () => {
     .then((resp) => {
       setBook(resp.data)
     })
-    .catch(err => console.log(err));
+    .catch((err) => naviga("not-found"));
   };
 
   const fetchTotalBooks = () => {
@@ -73,9 +74,16 @@ const SingleBook = () => {
             Vai al libro successivo
           </button>
       </div>
-      {/* RECENSIONI */}
-      { /*MAP DI TUTTE LE REVIEWS DEL LIBRO */}
-      <Reviews></Reviews>
+      <div className="reviews">
+        {book.reviews ? 
+          (book.reviews.map((review) => {
+            return <ReviewCard review={review}></ReviewCard>
+        })):(
+          <h2>
+            <em>Non ci sono ancora recensioni per questo libro</em>
+          </h2>
+        )}
+      </div>
   </div>
   )
 }
