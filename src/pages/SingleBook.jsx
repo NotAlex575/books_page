@@ -77,7 +77,7 @@ const SingleBook = () => {
       <div className="reviews">
         {book.reviews ? 
           (book.reviews.map((review) => {
-            return <ReviewCard review={review}></ReviewCard>
+            return <ReviewCard key={review.id} review={review}></ReviewCard>
         })):(
           <h2>
             <em>Non ci sono ancora recensioni per questo libro</em>
