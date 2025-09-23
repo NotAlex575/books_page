@@ -1,10 +1,10 @@
-const Bookcard_selected = ({book}) => {
+const Bookcard_selected = ({ book }) => {
   const {title, image, author } = book
     return (
         <div className="col-12">
             <div className="card medium-card">
               <img 
-                  src = {image || "./img/sample.jpg"} 
+                  src = {image} 
                   className="img-fluid"
                   alt = {author} 
               />

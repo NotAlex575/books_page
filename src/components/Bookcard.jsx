@@ -7,7 +7,7 @@ const BookCard = ({ book }) =>{
             <div className="card">
                 <Link className="text-decoration-none" to={`/${id}`}>
                 <img 
-                    src = {image || "./img/sample.jpg"} 
+                    src = {image} 
                     className="card-img"
                     alt = {author} 
                 />
