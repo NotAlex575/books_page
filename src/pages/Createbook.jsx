@@ -43,81 +43,75 @@ const Createbook = () => {
         <div className='container mt-5'>
             <div className='row justify-content-center'>
                 <div className='col-lg-8 col-md-10 col-12'>
-                <div className='card shadow-lg'>
-                    <div className='bg-orange card-header text-white text-center'>
-                        <h3 className='mb-0'>Aggiungi Nuovo libro</h3>
-                    </div>
-
-                    <div className='card-body p-4'>
-                    <form onSubmit={handleSubmit}>
-                        <div className='row gy-4'>
-                        
-                        <div className='col-12'>
-                            <label htmlFor="title" className='form-label'>Titolo</label>
-                            <input 
-                            name='title'
-                            id='title'
-                            type="text"
-                            className="form-control"
-                            value={formData.title}
-                            placeholder='Inserisci titolo libro'
-                            required
-                            onChange={setFieldValue}
-                            />
+                    <div className='card shadow-lg'>
+                        <div className='bg-orange card-header text-white text-center'>
+                            <h3 className='mb-0'>Aggiungi Nuovo libro</h3>
                         </div>
-
-                        <div className='col-12'>
-                            <label htmlFor="author" className='form-label'>Autore</label>
-                            <input 
-                            name='author'
-                            id='author'
-                            type="text"
-                            className="form-control"
-                            value={formData.author}
-                            placeholder='Inserisci autore libro'
-                            required
-                            onChange={setFieldValue}
-                            />
+                        <div className='card-body p-4'>
+                            <form onSubmit={handleSubmit}>
+                                <div className='row gy-4'>
+                                    <div className='col-12'>
+                                        <label htmlFor="title" className='form-label'>Titolo</label>
+                                        <input 
+                                        name='title'
+                                        id='title'
+                                        type="text"
+                                        className="form-control"
+                                        value={formData.title}
+                                        placeholder='Inserisci titolo libro'
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="author" className='form-label'>Autore</label>
+                                        <input 
+                                        name='author'
+                                        id='author'
+                                        type="text"
+                                        className="form-control"
+                                        value={formData.author}
+                                        placeholder='Inserisci autore libro'
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="image" className='form-label'>Immagine</label>
+                                        <input 
+                                        name='image'
+                                        id='image'
+                                        type="file"
+                                        className="form-control"
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="abstract" className='form-label'>Plot</label>
+                                        <textarea 
+                                        name="abstract" 
+                                        id="abstract" 
+                                        className='form-control'
+                                        value={formData.abstract}
+                                        placeholder='Inserisci plot'
+                                        required
+                                        onChange={setFieldValue}
+                                        ></textarea>
+                                    </div>
+                                    <div className='col-12 text-center'>
+                                        <button 
+                                        className='btn btn-success px-4' 
+                                        type='submit'
+                                        >Aggiungi libro</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-
-                        <div className='col-12'>
-                            <label htmlFor="image" className='form-label'>Immagine</label>
-                            <input 
-                            name='image'
-                            id='image'
-                            type="file"
-                            className="form-control"
-                            required
-                            onChange={setFieldValue}
-                            />
-                        </div>
-
-                        <div className='col-12'>
-                            <label htmlFor="abstract" className='form-label'>Plot</label>
-                            <textarea 
-                            name="abstract" 
-                            id="abstract" 
-                            className='form-control'
-                            value={formData.abstract}
-                            placeholder='Inserisci plot'
-                            required
-                            onChange={setFieldValue}
-                            ></textarea>
-                        </div>
-
-                        <div className='col-12 text-center'>
-                            <button 
-                            className='btn btn-success px-4' 
-                            type='submit'
-                            >Aggiungi libro</button>
-                        </div>
-                        </div>
-                    </form>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
+        </div>
     )
 }
 

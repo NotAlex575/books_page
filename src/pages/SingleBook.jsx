@@ -3,7 +3,7 @@ import { useParams, useNavigate} from "react-router-dom"
 import { useState, useEffect } from "react"
 import Bookcard_selected from "../components/Bookcard_selected"
 import ReviewCard from "../components/ReviewCard"
-
+import ReviewForm from "../components/ReviewForm"
 
 const SingleBook = () => {
 
@@ -75,8 +75,8 @@ const SingleBook = () => {
           </button>
       </div>
       <div className="reviews">
-        {book.reviews ? 
-          (book.reviews.map((review) => {
+        {book.reviews && book.reviews.length > 0 ? (
+          book.reviews.map((review) => {
             return <ReviewCard key={review.id} review={review}></ReviewCard>
         })):(
           <h2>
@@ -84,6 +84,7 @@ const SingleBook = () => {
           </h2>
         )}
       </div>
+      <ReviewForm bookId ={id} reloadReviews={fetchBook}></ReviewForm>
   </div>
   )
 }

@@ -14,7 +14,7 @@ const Navbar = () => {
           <a className="margin-left-right-50" href="/">
             <i className="fa-solid fa-book fa-3x"></i>
           </a>
-          <h2 className="text-white margin-left-right-50">QUESTA E LA NAVBAR BOOKlY</h2>
+          <h1 className="margin-left-right-50">QUESTA E LA NAVBAR BOOKlY</h1>
           <button 
           className="btn btn-primary margin-left-right-50"
           onClick={goCreateBook}

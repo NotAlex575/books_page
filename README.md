@@ -259,7 +259,7 @@ inizia col sbizzarrirti col html e css per la struttura grafica della homepage!
 
 se ti serve ti metto un'esempio!
 
-### 1) HOMEPAGE (esempio)
+5. HOMEPAGE (esempio)
 
 ```jsx
 const Homepage = () => {
@@ -296,23 +296,66 @@ export default Homepage
 
 ---
 
-### 2) NAVBAR -> esempio semplificato
+6. NAVBAR 
+
+creiamoci un nuovo component, ovvero la navbar!
+
+quindi nella cartella components:
+
+1. creiamo il file Navbar.jsx:
 
 ```jsx
-const Navbar = () => {
-    return (
-        <header className="bg-orange">
-            <h1>Questa è la navbar!</h1>
-        </header>
-    )
-}
+    const Navbar = () => {
+        return (
+            <header className="bg-orange">
+                <h1>Questa è la navbar!</h1>
+            </header>
+        )
+    }
 
-export default Navbar
+    export default Navbar
 ```
 
-### 3) `index.css` -> esempi di stili aggiunti
+2. miglioriamola esteticamente con un pò di html:
+
+```jsx
+
+    import { useNavigate } from "react-router-dom";
+
+    const Navbar = () => {
+
+    const naviga = useNavigate();
+
+    const goCreateBook = () => {
+        naviga("/create");
+    }
+    return (
+        <header className="bg-orange">
+        <nav className="navbar">
+            <div className="d-flex justify-content-between">
+            <a className="margin-left-right-50" href="/">
+                <i className="fa-solid fa-book fa-3x"></i>
+            </a>
+            <h1 className="margin-left-right-50">QUESTA E LA NAVBAR BOOKlY</h1>
+            </div>
+        </nav>
+        </header>
+    )
+    }
+
+    export default Navbar
+
+```
+
+7. ho aggiunto qualcosina di css nell'header:
+
 
 ```css
+
+*{
+    font-family: sans-serif;
+}
+
 .bg-orange{
     background-color: #a37230;
     text-align: center;
@@ -333,9 +376,6 @@ h1, h2, h3, h4, h5, h6{
     color: #a37230 !important;
 }
 
-body{
-    font-family: sans-serif;
-}
 ```
 
 fatto ciò abbiamo un vero e proprio scheletro della nostra homepage, con 5 card dei """libri""".
@@ -652,8 +692,9 @@ esempio:
                 alt = {book.author}
             />
                 <div className="overlay">
-                <h2 className="text-center my-3">{book.title}</h2>
-                <p className="text-center">{book.author}</p>
+                    <h2 className="text-center my-3">{book.title}</h2>
+                    <p className="text-center">{book.author}</p>
+                    <p className="text-center">{book.abstract}</p>
                 </div>
             </div>
         </div>
@@ -682,23 +723,25 @@ ho aggiunto anche qualcosina nell'`index.css`:
 esempio:
 
 ```jsx
-const Bookcard_selected = ({book}) => {
-    const {id, title, image, author } = book
+const Bookcard_selected = ({ book }) => {
+  const {title, image, author, abstract} = book
     return (
         <div className="col-12">
             <div className="card medium-card">
-            <img
-                src = {"./img/sample.jpg"}
-                className="img-fluid"
-                alt = {author}
-            />
+              <img 
+                  src={image} 
+                  className="img-fluid"
+                  alt={author} 
+                />
                 <div className="overlay">
-                <h2 className="text-center my-3">{title}</h2>
-                <p className="text-center">{author}</p>
+                  <h2 className="text-center my-3">{title}</h2>
+                  <p className="text-center">{author}</p>
+                  <p className="text-center">{abstract}</p>
                 </div>
             </div>
         </div>
     )
+    
 }
 
 export default Bookcard_selected
@@ -1022,57 +1065,61 @@ Struttura creata:
 const Createbook = () => {
   return (
     <div className='container mt-5'>
-        <div className='row'>
-            <div className='col-12'>
-                <h2>Aggiungi Nuovo libro</h2>
-            </div>
-            <div className='col-12'>
-                <form >
-                    <div className='row gy-4'>
-                        <div className='col-12 col-md-4'>
-                            <label htmlFor="" className='form-label'>Titolo</label>
-                            <input 
-                                name='title'
-                                id='title'
-                                type="text"
-                                classname="form-control"
-                                placeholder='Inserisci titolo libro'
-                            />
-                        </div>
-                        <div className='col-12 col-md-4'>
-                            <label htmlFor="" className='form-label'>Autore</label>
-                            <input 
-                                name='author'
-                                id='author'
-                                type="text"
-                                className="form-control"
-                                placeholder='Inserisci autore libro'
-                            />
-                        </div>
-                        <div className='col-12 col-md-4'>
-                            <label htmlFor="" className='form-label'>Immagine</label>
-                            <input 
-                                name='image'
-                                id='image'
-                                type="file"
-                                classname="form-control"
-                                placeholder='Inserisci immagine libro'
-                            />
-                        </div>
-                        <div className='col-12'>
-                            <label htmlFor="" className='form-label'>Plot</label>
-                            <textarea 
-                                name="abstract" 
-                                id="abstract" 
-                                className='form-control'
-                                placeholder='Inserisci plot'>
-                            </textarea>
-                        </div>
-                        <div className='col-12'>
-                            <button className='btn btn-primary' type='submit'>Aggiungi libro</button>
-                        </div>
+            <div className='row justify-content-center'>
+                <div className='col-lg-8 col-md-10 col-12'>
+                <div className='card shadow-lg'>
+                    <div className='bg-orange card-header text-white text-center'>
+                        <h3 className='mb-0'>Aggiungi Nuovo libro</h3>
                     </div>
-                </form>
+                <div className='card-body p-4'>
+                    <form >
+                        <div className='row gy-4'>
+                            <div className='col-12 col-md-4'>
+                                <label htmlFor="" className='form-label'>Titolo</label>
+                                <input 
+                                    name='title'
+                                    id='title'
+                                    type="text"
+                                    classname="form-control"
+                                    placeholder='Inserisci titolo libro'
+                                />
+                            </div>
+                            <div className='col-12 col-md-4'>
+                                <label htmlFor="" className='form-label'>Autore</label>
+                                <input 
+                                    name='author'
+                                    id='author'
+                                    type="text"
+                                    className="form-control"
+                                    placeholder='Inserisci autore libro'
+                                />
+                            </div>
+                            <div className='col-12 col-md-4'>
+                                <label htmlFor="" className='form-label'>Immagine</label>
+                                <input 
+                                    name='image'
+                                    id='image'
+                                    type="file"
+                                    classname="form-control"
+                                    placeholder='Inserisci immagine libro'
+                                />
+                            </div>
+                            <div className='col-12'>
+                                <label htmlFor="" className='form-label'>Plot</label>
+                                <textarea 
+                                    name="abstract" 
+                                    id="abstract" 
+                                    className='form-control'
+                                    placeholder='Inserisci plot'>
+                                </textarea>
+                            </div>
+                            <div className='col-12'>
+                                <button className='btn btn-primary' type='submit'>Aggiungi libro</button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1101,6 +1148,7 @@ ma li manda i dati al momento con questo che abbiamo scritto? non ancora!
 
     1. axios 
     2. useState e useEffect
+    3. useNavigate
 
 5. prima del return, creiamo la variabile di stato:
 
@@ -1108,6 +1156,7 @@ ma li manda i dati al momento con questo che abbiamo scritto? non ancora!
 ```jsx
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Createbook = () => {
 
@@ -1125,3 +1174,393 @@ const Createbook = () => {
 
 export default Createbook
 
+```
+
+6. creiamo la nostra costante per navigare tra le pagine (naviga):
+
+``` jsx
+
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Createbook = () => {
+
+    const [formData, setFormData] = useState({
+        title: "",
+        author: "",
+        image: null,
+        abstract: ""
+    })
+
+    const naviga = useNavigate(); //constante per navigare tra le pagine
+
+    return (
+        ...
+    )
+}
+
+```
+
+7. creiamo i nostri 2 eventi:
+
+
+- evento setFieldValue, dove andiamo a prendere i valori all'interno del form, e li salviamo nel formData:
+
+```jsx
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Createbook = () => {
+
+    const [formData, setFormData] = useState({
+        title: "",
+        author: "",
+        image: null,
+        abstract: ""
+    })
+
+    const naviga = useNavigate();
+
+    const setFieldValue = event => {
+        //recuperiamo i valori delle proprietà name e value del campo input
+        const { name, value } = event.target;
+
+         // se il campo è "image" (quindi un file), salvo il file caricato dall’utente (prendo il primo della lista dei file)
+        if(name === "image"){
+            setFormData({ ...formData, image: event.target.files[0] });
+        }
+
+        // se invece è un normale campo di testo (quindi "title", "author", "abstract" => [name]), aggiorno quella proprietà dentro formData
+        else{
+            setFormData({ ...formData, [name]: value });
+        }
+    }
+
+    return (
+        ...
+    )
+}
+```
+
+- evento handleSubmit, dove andiamo a inviare i valori all'interno del formData:
+
+``` jsx
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Createbook = () => {
+
+    const [formData, setFormData] = useState({
+        title: "",
+        author: "",
+        image: null,
+        abstract: ""
+    })
+
+    const naviga = useNavigate();
+
+    const setFieldValue = event => {
+        //recuperiamo i valori delle proprietà name e value del campo input
+        const { name, value } = event.target;
+
+         // se il campo è "image" (quindi un file), salvo il file caricato dall’utente (prendo il primo della lista dei file)
+        if(name === "image"){
+            setFormData({ ...formData, image: event.target.files[0] });
+        }
+
+        // se invece è un normale campo di testo (quindi "title", "author", "abstract" => [name]), aggiorno quella proprietà dentro formData
+        else{
+            setFormData({ ...formData, [name]: value });
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        axios.post("http://localhost:3000/books", formData, { 
+            headers: {"Content-Type": "multipart/form-data"},
+        }).then(resp => {
+            console.log("libro inserito correttamente")
+            naviga("/");
+        })
+    }
+
+    return (
+        ...
+    )
+}
+```
+
+8. aggiungiamo in input name='title', input name='author', input name='image', input name='abstract' il seguente:
+
+
+
+``` jsx
+
+return (
+        <div className='container mt-5'>
+            <div className='row justify-content-center'>
+                <div className='col-lg-8 col-md-10 col-12'>
+                    <div className='card shadow-lg'>
+                        <div className='bg-orange card-header text-white text-center'>
+                            <h3 className='mb-0'>Aggiungi Nuovo libro</h3>
+                        </div>
+                        <div className='card-body p-4'>
+                            <form onSubmit={handleSubmit}>
+                                <div className='row gy-4'>
+                                    <div className='col-12'>
+                                        <label htmlFor="title" className='form-label'>Titolo</label>
+                                        <input 
+                                        name='title'
+                                        id='title'
+                                        type="text"
+                                        className="form-control"
+                                        value={formData.title}
+                                        placeholder='Inserisci titolo libro'
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="author" className='form-label'>Autore</label>
+                                        <input 
+                                        name='author'
+                                        id='author'
+                                        type="text"
+                                        className="form-control"
+                                        value={formData.author}
+                                        placeholder='Inserisci autore libro'
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="image" className='form-label'>Immagine</label>
+                                        <input 
+                                        name='image'
+                                        id='image'
+                                        type="file"
+                                        className="form-control"
+                                        required
+                                        onChange={setFieldValue}
+                                        />
+                                    </div>
+                                    <div className='col-12'>
+                                        <label htmlFor="abstract" className='form-label'>Plot</label>
+                                        <textarea 
+                                        name="abstract" 
+                                        id="abstract" 
+                                        className='form-control'
+                                        value={formData.abstract}
+                                        placeholder='Inserisci plot'
+                                        required
+                                        onChange={setFieldValue}
+                                        ></textarea>
+                                    </div>
+                                    <div className='col-12 text-center'>
+                                        <button 
+                                        className='btn btn-success px-4' 
+                                        type='submit'
+                                        >Aggiungi libro</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+
+```
+
+9. completata la creazione della pagina "Createbook.jsx", andiamo ad inserire un bottone per entrare nella pagina!
+
+io l'ho messo dentro alla navbar:
+
+---
+
+## 23) CREAZIONE DI UNA NUOVA RECENSIONE IN UN LIBRO
+
+
+ora che sappiamo come aggiungere un libro, e se vogliamo invece aggiungere una recensione ad un libro già esistente?
+
+nessun problema!
+
+iniziamo col crearlo:
+
+1. in Singlebook.jsx, nel 
+
+``` jsx
+
+<div className="reviews">
+
+```
+
+andiamo a modificare il modo in cui cicliamo le recensioni del libro, aggiungendo nella condizione iniziale un .length > 0:
+
+``` jsx
+
+{book.reviews.length > 0 ? (
+          book.reviews.map((review) => {
+            return <ReviewCard key={review.id} review={review}></ReviewCard>
+        })):(
+          <h2>
+            <em>Non ci sono ancora recensioni per questo libro</em>
+          </h2>
+        )}
+
+``` 
+
+
+2. ora è necessaria una modifica al lato back-end, segui il capitolo ## 23) CREAZIONE DI UNA NUOVA RECENSIONE IN UN LIBRO punto 2 nel progetto webapp-libro
+
+9.  fatto la parte back-end, creiamo una nuova props nella cartella components, e la chiamiamo ReviewForm.jsx
+
+10. creiamoci la parte html
+
+io l'ho creata cosi:
+
+``` jsx
+
+
+const ReviewForm = () => {
+  return (
+    <div className='container mt-5'>
+            <div className='row justify-content-center'>
+                <div className='col-lg-8 col-md-10 col-12'>
+                    <div className='card shadow-lg'>
+                        <div className='bg-orange card-header text-white text-center'>
+                            <h3 className='mb-0'>Aggiungi nuova recensione</h3>
+                        </div>
+                        <div className='card-body p-4'>
+                            <form action="">
+                                <div className='form-group mb-3'>
+                                    <label htmlFor="" className='form-label'>
+                                        Nome
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        className='form-control' 
+                                        placeholder='Nome' 
+                                        name='name' 
+                                        id='name'
+                                    />
+                                </div>
+                                <div className='form-group mb-3'>
+                                    <label htmlFor="" className='form-label'>
+                                        Voto
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        className='form-control' 
+                                        placeholder='Voto' 
+                                        min="0"
+                                        max="5"
+                                        name='vote' 
+                                        id='vote'
+                                    />
+                                </div>
+                                <div className='form-group mb-3'>
+                                    <label htmlFor="" className='form-label'>
+                                        Testo recensione
+                                    </label>
+                                    <textarea 
+                                        type="text" 
+                                        className='form-control' 
+                                        placeholder='Testo recensione' 
+                                        name='text' 
+                                        id='text'
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <button className='btn btn-primary' type='submit'>Salva Recensione</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  )
+}
+
+export default ReviewForm
+
+```
+
+11. in SingleBook.jsx importiamo la props ReviewForm, e la inseriamo sotto a:
+
+``` jsx
+
+import axios from "axios"
+import { useParams, useNavigate} from "react-router-dom"
+import { useState, useEffect } from "react"
+import Bookcard_selected from "../components/Bookcard_selected"
+import ReviewCard from "../components/ReviewCard"
+import ReviewForm from "../components/ReviewForm" //IMPORT DELLA REVIEWFORM
+
+
+```
+
+
+``` jsx
+
+<div className="reviews">
+    {book.reviews ? 
+        (book.reviews.map((review) => {
+            return <ReviewCard key={review.id} review={review}></ReviewCard>
+        })):(
+        <h2>
+            <em>Non ci sono ancora recensioni per questo libro</em>
+        </h2>
+    )}
+</div>
+<ReviewForm bookId ={id} ></ReviewForm>
+
+
+```
+
+ci passiamo subito la value id, siccome ci serve per mettere la recensione nel libro in cui ci troviamo
+
+ovviamente, nella const ReviewFrom, ci inseriamo al suo interno il valore id che abbiamo passato da SingleBook.jsx:
+
+``` jsx
+const ReviewForm = ({ bookId }) => {
+    //...
+}
+
+``` 
+
+12. importiamo i seguenti nel Review.jsx:
+
+``` jsx
+
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+```
+
+13. ora, creiamo la logica per inserire una review:
+
+nella const ReviewForm, inseriamo l'url in cui manderemo la review nel back-end:
+
+``` jsx
+
+const ReviewForm = ({ bookId }) => {
+
+    const url = `http://localhost:3000/books/${bookId}/reviews`;
+
+    return (
+        //...
+    )
+
+export default ReviewForm
+
+
+```
+
+14. 
