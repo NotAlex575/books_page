@@ -988,3 +988,140 @@ vai al passaggio 19 che si trova nell'altro progetto!
 
 ---
 
+## 22) CREAZIONE DI UNO LIBRO TRAMITE UNA PAGINA
+
+e se vogliamo creare un nuovo libro, inserendo i dati in una pagina, per poi inviare il contenuto scritto nella parte back-end?
+
+lo possiamo fare!
+
+1. creiamo una nuova pagina nella cartella pages, chiamiamo il nuovo file CreateBook.jsx
+
+2. scriviamo rafce + invio per creare il suo scheletro iniziale:
+
+```jsx
+
+    import React from 'react'
+
+    const Createbook = () => {
+        return (
+            <div>Createbook</div>
+        )
+    }
+
+    export default Createbook
+
+```
+
+3. creiamo dentro al return il suo html:
+
+Struttura creata:
+
+
+```jsx
+
+const Createbook = () => {
+  return (
+    <div className='container mt-5'>
+        <div className='row'>
+            <div className='col-12'>
+                <h2>Aggiungi Nuovo libro</h2>
+            </div>
+            <div className='col-12'>
+                <form >
+                    <div className='row gy-4'>
+                        <div className='col-12 col-md-4'>
+                            <label htmlFor="" className='form-label'>Titolo</label>
+                            <input 
+                                name='title'
+                                id='title'
+                                type="text"
+                                classname="form-control"
+                                placeholder='Inserisci titolo libro'
+                            />
+                        </div>
+                        <div className='col-12 col-md-4'>
+                            <label htmlFor="" className='form-label'>Autore</label>
+                            <input 
+                                name='author'
+                                id='author'
+                                type="text"
+                                className="form-control"
+                                placeholder='Inserisci autore libro'
+                            />
+                        </div>
+                        <div className='col-12 col-md-4'>
+                            <label htmlFor="" className='form-label'>Immagine</label>
+                            <input 
+                                name='image'
+                                id='image'
+                                type="file"
+                                classname="form-control"
+                                placeholder='Inserisci immagine libro'
+                            />
+                        </div>
+                        <div className='col-12'>
+                            <label htmlFor="" className='form-label'>Plot</label>
+                            <textarea 
+                                name="abstract" 
+                                id="abstract" 
+                                className='form-control'
+                                placeholder='Inserisci plot'>
+                            </textarea>
+                        </div>
+                        <div className='col-12'>
+                            <button className='btn btn-primary' type='submit'>Aggiungi libro</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default Createbook
+
+```
+
+qui abbiamo 3 input e 1 textarea che ci servono per inserire i dati del libro:
+
+    INPUT:
+    1. TITOLO
+    2. AUTORE
+    3. IMMAGINE
+
+    TEXTAREA:
+    4. ABSTRACT (che per la precisione, è la descrizione del libro)
+
+sotto a tutto questo abbiamo un button che, al suo submit, manderà i dati al back-end!
+
+ma li manda i dati al momento con questo che abbiamo scritto? non ancora!
+
+4. Sopra a tutto, importiamo i seguenti in Createbook.js :
+
+    1. axios 
+    2. useState e useEffect
+
+5. prima del return, creiamo la variabile di stato:
+
+
+```jsx
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+const Createbook = () => {
+
+    const [formData, setFormData] = useState({
+        title: "",
+        author: "",
+        image: null,
+        abstract: ""
+    })
+
+    return (
+        ...
+    )
+}
+
+export default Createbook
+
